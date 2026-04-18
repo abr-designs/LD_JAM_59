@@ -63,6 +63,9 @@ namespace Prototypes.Alex
         private bool m_approvedDocking;
         private bool m_didHailPort;
 
+        //Unity Functions
+        //================================================================================================================//
+
         protected override void Start()
         {
             base.Start();
@@ -201,10 +204,13 @@ namespace Prototypes.Alex
         {
             flagCommsResults = ProcessPlayerFlags(boatType);
 
-            return flagCommsResults != null && flagCommsResults.IsValid && !flagCommsResults.ShouldIgnore;
+            return flagCommsResults != null && !flagCommsResults.ShouldIgnore;
         }
         private static FlagCommsResults ProcessPlayerFlags(FLAG myFlag)
         {
+            if(s_playerFlagHoist.CurrentFlags == null || s_playerFlagHoist.CurrentFlags.Count <= 0)
+                return null;
+            
             //TODO I should be checking if the flags changed, before doing all the stuff below
             var currentFlags = s_playerFlagHoist.CurrentFlags;
             var currentFlagTypes = s_playerFlagHoist.CurrentFlags.Select(f => f.GetFlagDefinition().type);
@@ -251,44 +257,6 @@ namespace Prototypes.Alex
                 return true;
             }
         }
-
-        /*private IEnumerator FlagsCommunicationCoroutine()
-        {
-            //TODO Move towards port
-                
-            while (inRangeOfTower == false)
-            {
-                var pos = Vector3.MoveTowards(transform.position, moveToTargetTransform.position, Time.deltaTime * moveSpeed);
-                var dir = (pos - transform.position).normalized;
-                
-                transform.position = pos;
-                transform.forward = dir;
-                
-                if(Vector3.Distance(transform.position, moveToTargetTransform.position) < minDistanceThreshold)
-                    inRangeOfTower = true;
-
-                yield return null;
-            }
-            
-            //TODO If arriving in range, and player flags are visible, react too
-            
-            while (true)
-            {
-                var pos = Vector3.MoveTowards(transform.position, moveToDockTargetTransform.position, Time.deltaTime * moveSpeed);
-                var dir = (pos - transform.position).normalized;
-                
-                transform.position = pos;
-                transform.forward = dir;
-
-                yield return null;
-                //TODO Await callouts from player tower targetting this ship when within range
-            }
-            
-            
-            
-            
-            throw new NotImplementedException();
-        }*/
 
         //Callbacks
         //================================================================================================================//

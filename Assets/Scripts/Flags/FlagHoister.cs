@@ -37,8 +37,10 @@ public class FlagHoister : MonoBehaviour
         if (m_activeFlagRenderers.Count > 0)
         {
             StartCoroutine(RemoveFlagsCoroutine());
-            return;
         }
+
+        if (flags.Count == 0)
+            return;
         
         CurrentFlags = new List<FLAG>(flags);
         StartCoroutine(HoistFlagsCoroutine(flags));
