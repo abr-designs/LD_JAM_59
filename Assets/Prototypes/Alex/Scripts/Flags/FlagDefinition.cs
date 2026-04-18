@@ -13,7 +13,7 @@ namespace Prototypes.Alex
 
     public enum FLAG
     {
-        ACKNOWLEDGE,
+        ACKNOWLEDGE_RESPONDING,
         UNCLEAR,
         CARGO_PASSENGER,
         CARGO_GOODS,

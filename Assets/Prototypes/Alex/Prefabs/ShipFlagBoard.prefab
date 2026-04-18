@@ -138,17 +138,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.FlagBoard
   interactable: 0
   flagDefinitions:
-  - {fileID: 11400000, guid: 2638a6dcd0aae924eae447fa7de60abf, type: 2}
-  - {fileID: 11400000, guid: d202f351783551544894acb065c76494, type: 2}
-  - {fileID: 11400000, guid: f67bcbee3f211634f9288d528682dd2a, type: 2}
-  - {fileID: 11400000, guid: e8c2b6d98069f294a96148dd04496670, type: 2}
   - {fileID: 11400000, guid: e01921eac0db29a4dbf976e753ec87b1, type: 2}
-  - {fileID: 11400000, guid: ccdeb8ff4dcef5b4a807869e839d71d1, type: 2}
-  - {fileID: 11400000, guid: e61c1b944297f1740bd1566728163607, type: 2}
-  - {fileID: 11400000, guid: a75d5e4c03b68704d905dab5fd6a48c3, type: 2}
   - {fileID: 11400000, guid: bc91aa81b2ec91c42bfe095ba1d841fe, type: 2}
   - {fileID: 11400000, guid: b0bc420cd9c711c468f93efb9145e352, type: 2}
+  - {fileID: 11400000, guid: f67bcbee3f211634f9288d528682dd2a, type: 2}
+  - {fileID: 11400000, guid: a75d5e4c03b68704d905dab5fd6a48c3, type: 2}
+  - {fileID: 11400000, guid: ccdeb8ff4dcef5b4a807869e839d71d1, type: 2}
+  - {fileID: 11400000, guid: e61c1b944297f1740bd1566728163607, type: 2}
+  - {fileID: 11400000, guid: d202f351783551544894acb065c76494, type: 2}
   - {fileID: 11400000, guid: 4de3efa47247e944f8ef637090f34a86, type: 2}
+  - {fileID: 11400000, guid: e8c2b6d98069f294a96148dd04496670, type: 2}
+  - {fileID: 11400000, guid: 2638a6dcd0aae924eae447fa7de60abf, type: 2}
   flagBoardItemPrefab: {fileID: 5424905309857180989, guid: 28e56f9997ef90e4b9b1c4e2e9b6fd3b, type: 3}
   spacing: {x: 0.75, y: 0.3}
   maxItemsPerColumn: 5

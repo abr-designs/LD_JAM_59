@@ -156,6 +156,39 @@ Transform:
   - {fileID: 2086609973}
   m_Father: {fileID: 964254339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &131634928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 131634929}
+  m_Layer: 0
+  m_Name: --- POI ---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &131634929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131634928}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 822295817}
+  - {fileID: 623969632}
+  m_Father: {fileID: 964254339}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,15 +588,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.232464
+      value: 41.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -60.1
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -600,7 +633,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1016351538}
   m_SourcePrefab: {fileID: 100100000, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
 --- !u!1 &376223901
 GameObject:
@@ -783,6 +819,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.22917752, y: 0.5365607, z: 1.0000002}
   m_Center: {x: -0.38541123, y: -0.23171964, z: 7.427247e-15}
+--- !u!1 &623969631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 623969632}
+  m_Layer: 0
+  m_Name: DockPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &623969632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623969631}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.5, y: 0, z: 23.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 131634929}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &659566407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4288916286424774519, guid: 3259045f869610d448bd77136bcf9bba, type: 3}
@@ -903,6 +970,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be68fb88a7ba3f647ba33c310a495b25, type: 3}
+--- !u!1 &822295816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822295817}
+  m_Layer: 0
+  m_Name: PortPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822295817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822295816}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.8, y: 0, z: -27.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 131634929}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849692497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1279,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 131634929}
   - {fileID: 34105417}
   - {fileID: 1016351537}
   - {fileID: 203844589}
@@ -1189,11 +1288,45 @@ Transform:
   - {fileID: 659566407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1016351534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
+  m_PrefabInstance: {fileID: 347929086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1016351537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
   m_PrefabInstance: {fileID: 347929086}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1016351538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016351534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2de0e9402de47d3a80368dd94faaa5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.BoatFlagHoist
+  maxFlags: 3
+  flagPrefab: {fileID: 8030972069811473040, guid: e8774b60c306c0b4eb0749096b84b08c, type: 3}
+  flagSize: 0.71
+  flagSpawnPosition: {x: 0, y: 8.61, z: 0}
+  targetPosition: {x: 0, y: 11.02, z: 0}
+  spacing: 0.16
+  moveSpeed: 0
+  boatType: 5
+  carryingFlag: 3
+  minDistanceThreshold: 75
+  inRangeOfTower: 0
+  presentFlagsOnStart: 
+  moveToTargetTransform: {fileID: 822295817}
+  moveToDockTargetTransform: {fileID: 623969632}
+  boatMoveSpeed: 6
+  startingState: 3
+  state: 0
 --- !u!1 &1359809324
 GameObject:
   m_ObjectHideFlags: 0

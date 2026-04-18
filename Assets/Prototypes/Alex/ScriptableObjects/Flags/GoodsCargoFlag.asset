@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.FlagDefinition
   type: 3
   flag: 3
-  sprite: {fileID: 1950373242, guid: 5d40bb6b6aa544f43a001857f9d71a05, type: 3}
+  sprite: {fileID: -2067644335, guid: 5d40bb6b6aa544f43a001857f9d71a05, type: 3}
   description: Holding Goods

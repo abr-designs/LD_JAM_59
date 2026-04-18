@@ -8,6 +8,7 @@ using UnityEngine;
 public class FlagHoister : MonoBehaviour
 {
     public event Action<IReadOnlyList<FLAG>> OnFlagsChanged;
+    public IReadOnlyList<FLAG> CurrentFlags { get; private set; }
     
     public int maxFlags;
     public SpriteRenderer flagPrefab;
@@ -18,7 +19,6 @@ public class FlagHoister : MonoBehaviour
     public float spacing;
     public float moveSpeed;
 
-    private IReadOnlyList<FLAG> m_currentFlags;
     private List<SpriteRenderer> m_activeFlagRenderers;
     
     private static GameFlowManager s_gameFlowManager;
@@ -40,8 +40,16 @@ public class FlagHoister : MonoBehaviour
             return;
         }
         
-        m_currentFlags = flags;
+        CurrentFlags = new List<FLAG>(flags);
         StartCoroutine(HoistFlagsCoroutine(flags));
+    }
+
+    public void RemoveFlags()
+    {
+        if (m_activeFlagRenderers.Count == 0) 
+            return;
+        
+        StartCoroutine(RemoveFlagsCoroutine());
     }
 
     private IEnumerator HoistFlagsCoroutine(List<FLAG> flags)
@@ -63,7 +71,7 @@ public class FlagHoister : MonoBehaviour
             m_activeFlagRenderers.Add(flagSpriteRenderer);
         }
         
-        OnFlagsChanged?.Invoke(m_currentFlags);
+        OnFlagsChanged?.Invoke(CurrentFlags);
         
         yield break;
     }
@@ -76,7 +84,7 @@ public class FlagHoister : MonoBehaviour
             m_activeFlagRenderers.RemoveAt(i);
         }
 
-        m_currentFlags = new List<FLAG>();
+        CurrentFlags = new List<FLAG>();
         m_activeFlagRenderers.Clear();
         
         yield break;

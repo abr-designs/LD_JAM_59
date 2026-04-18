@@ -27,15 +27,15 @@ PrefabInstance:
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: d202f351783551544894acb065c76494, type: 2}
+      objectReference: {fileID: 11400000, guid: e8c2b6d98069f294a96148dd04496670, type: 2}
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: e8c2b6d98069f294a96148dd04496670, type: 2}
+      objectReference: {fileID: 11400000, guid: ccdeb8ff4dcef5b4a807869e839d71d1, type: 2}
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[4]'
       value: 
-      objectReference: {fileID: 11400000, guid: ccdeb8ff4dcef5b4a807869e839d71d1, type: 2}
+      objectReference: {fileID: 11400000, guid: d202f351783551544894acb065c76494, type: 2}
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[5]'
       value: 

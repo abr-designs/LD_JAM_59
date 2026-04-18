@@ -31,16 +31,14 @@ namespace Prototypes.Alex.Interactables
         {
             var ray = new Ray(cameraTransform.position, cameraTransform.forward);
 
-            if (Physics.Raycast(ray, out var hit, interactDistance, interactLayer))
-            {
-                Debug.Log("Hit: " + hit.collider.name);
+            if (!Physics.Raycast(ray, out var hit, interactDistance, interactLayer)) 
+                return;
+            Debug.Log("Hit: " + hit.collider.name);
 
-                // Option 1: Interface-based interaction
-                var interactable = hit.collider.GetComponent<IInteractable>();
-                if (interactable != null)
-                {
-                    interactable.OnInteract();
-                }
+            var interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.OnInteract();
             }
         }
     }
