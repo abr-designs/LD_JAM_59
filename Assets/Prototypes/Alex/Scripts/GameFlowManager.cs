@@ -36,5 +36,13 @@ namespace Prototypes.Alex
             
             yield return null;
         }
+        
+        //Utility Functions
+        //================================================================================================================//
+
+        public FlagDefinition GetFlagDefinition(FLAG flag)
+        {
+            return m_flags[flag];
+        }
     }
 }

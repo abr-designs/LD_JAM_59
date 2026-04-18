@@ -102,6 +102,9 @@ namespace GameInput
                 return;
             }
             
+            if(context.performed == false)
+                return;
+            
             var pressed = context.ReadValueAsButton();
             OnLeftClick?.Invoke(pressed);
         }

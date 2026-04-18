@@ -5,6 +5,7 @@ namespace Prototypes.Alex.Interactables
 {
     public class LookSelector : MonoBehaviour
     {
+        public Transform cameraTransform;
         public float interactDistance = 5f;
         public LayerMask interactLayer;
 
@@ -26,12 +27,11 @@ namespace Prototypes.Alex.Interactables
             TrySelect();
         }
 
-        void TrySelect()
+        private void TrySelect()
         {
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
+            var ray = new Ray(cameraTransform.position, cameraTransform.forward);
 
-            if (Physics.Raycast(ray, out hit, interactDistance, interactLayer))
+            if (Physics.Raycast(ray, out var hit, interactDistance, interactLayer))
             {
                 Debug.Log("Hit: " + hit.collider.name);
 
