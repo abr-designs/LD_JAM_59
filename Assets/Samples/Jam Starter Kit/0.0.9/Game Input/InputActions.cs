@@ -138,6 +138,24 @@ namespace GameInput
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseHorizontalDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""a7dcc980-d4ec-4db5-b484-532cdd872e0e"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseVerticalDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""e876a573-debe-4cc0-b411-d8290f7e2ae8"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -239,6 +257,28 @@ namespace GameInput
                     ""action"": ""Mouse Right Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ea9ce50-ceb4-4d9a-bc79-1faf91e77fdc"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseHorizontalDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ec38da8-5bbf-4fd9-80db-649e20ef5f50"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseVerticalDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -258,6 +298,8 @@ namespace GameInput
             m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
             m_Gameplay_MouseLeftClick = m_Gameplay.FindAction("Mouse Left Click", throwIfNotFound: true);
             m_Gameplay_MouseRightClick = m_Gameplay.FindAction("Mouse Right Click", throwIfNotFound: true);
+            m_Gameplay_MouseHorizontalDelta = m_Gameplay.FindAction("MouseHorizontalDelta", throwIfNotFound: true);
+            m_Gameplay_MouseVerticalDelta = m_Gameplay.FindAction("MouseVerticalDelta", throwIfNotFound: true);
             // Menu
             m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         }
@@ -346,6 +388,8 @@ namespace GameInput
         private readonly InputAction m_Gameplay_Jump;
         private readonly InputAction m_Gameplay_MouseLeftClick;
         private readonly InputAction m_Gameplay_MouseRightClick;
+        private readonly InputAction m_Gameplay_MouseHorizontalDelta;
+        private readonly InputAction m_Gameplay_MouseVerticalDelta;
         /// <summary>
         /// Provides access to input actions defined in input action map "Gameplay".
         /// </summary>
@@ -377,6 +421,14 @@ namespace GameInput
             /// Provides access to the underlying input action "Gameplay/MouseRightClick".
             /// </summary>
             public InputAction @MouseRightClick => m_Wrapper.m_Gameplay_MouseRightClick;
+            /// <summary>
+            /// Provides access to the underlying input action "Gameplay/MouseHorizontalDelta".
+            /// </summary>
+            public InputAction @MouseHorizontalDelta => m_Wrapper.m_Gameplay_MouseHorizontalDelta;
+            /// <summary>
+            /// Provides access to the underlying input action "Gameplay/MouseVerticalDelta".
+            /// </summary>
+            public InputAction @MouseVerticalDelta => m_Wrapper.m_Gameplay_MouseVerticalDelta;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -418,6 +470,12 @@ namespace GameInput
                 @MouseRightClick.started += instance.OnMouseRightClick;
                 @MouseRightClick.performed += instance.OnMouseRightClick;
                 @MouseRightClick.canceled += instance.OnMouseRightClick;
+                @MouseHorizontalDelta.started += instance.OnMouseHorizontalDelta;
+                @MouseHorizontalDelta.performed += instance.OnMouseHorizontalDelta;
+                @MouseHorizontalDelta.canceled += instance.OnMouseHorizontalDelta;
+                @MouseVerticalDelta.started += instance.OnMouseVerticalDelta;
+                @MouseVerticalDelta.performed += instance.OnMouseVerticalDelta;
+                @MouseVerticalDelta.canceled += instance.OnMouseVerticalDelta;
             }
 
             /// <summary>
@@ -444,6 +502,12 @@ namespace GameInput
                 @MouseRightClick.started -= instance.OnMouseRightClick;
                 @MouseRightClick.performed -= instance.OnMouseRightClick;
                 @MouseRightClick.canceled -= instance.OnMouseRightClick;
+                @MouseHorizontalDelta.started -= instance.OnMouseHorizontalDelta;
+                @MouseHorizontalDelta.performed -= instance.OnMouseHorizontalDelta;
+                @MouseHorizontalDelta.canceled -= instance.OnMouseHorizontalDelta;
+                @MouseVerticalDelta.started -= instance.OnMouseVerticalDelta;
+                @MouseVerticalDelta.performed -= instance.OnMouseVerticalDelta;
+                @MouseVerticalDelta.canceled -= instance.OnMouseVerticalDelta;
             }
 
             /// <summary>
@@ -604,6 +668,20 @@ namespace GameInput
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMouseRightClick(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "MouseHorizontalDelta" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnMouseHorizontalDelta(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "MouseVerticalDelta" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnMouseVerticalDelta(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Menu" which allows adding and removing callbacks.

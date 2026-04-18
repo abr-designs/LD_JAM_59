@@ -8,6 +8,7 @@ namespace GameInput
     {
         public static event Action<bool> InputLockChanged;
         public static event Action<Vector2> OnMovementChanged;
+        public static event Action<Vector2> OnMouseMoved;
         public static event Action<bool> OnJumpPressed;
     
         public static event Action<bool> OnLeftClick;
@@ -16,6 +17,7 @@ namespace GameInput
         public static bool LockInputs { get; private set; }
 
         private Vector2 _currentInput;
+        private Vector2 _currentMouseDelta;
     
         //============================================================================================================//\
 
@@ -100,6 +102,9 @@ namespace GameInput
                 return;
             }
             
+            if(context.performed == false)
+                return;
+            
             var pressed = context.ReadValueAsButton();
             OnLeftClick?.Invoke(pressed);
         }
@@ -114,6 +119,36 @@ namespace GameInput
             
             var pressed = context.ReadValueAsButton();
             OnRightClick?.Invoke(pressed);
+        }
+
+        public void OnMouseHorizontalDelta(InputAction.CallbackContext context)
+        {
+            if (LockInputs)
+            {
+                _currentMouseDelta = Vector2.zero;
+                OnMovementChanged?.Invoke(_currentMouseDelta);
+                return;
+            }
+            
+            var x = context.ReadValue<float>();
+
+            _currentMouseDelta.x = x;
+            OnMouseMoved?.Invoke(_currentMouseDelta);
+        }
+
+        public void OnMouseVerticalDelta(InputAction.CallbackContext context)
+        {
+            if (LockInputs)
+            {
+                _currentMouseDelta = Vector2.zero;
+                OnMovementChanged?.Invoke(_currentMouseDelta);
+                return;
+            }
+            
+            var y = context.ReadValue<float>();
+
+            _currentMouseDelta.y = y;
+            OnMouseMoved?.Invoke(_currentMouseDelta);
         }
 
         //============================================================================================================//
