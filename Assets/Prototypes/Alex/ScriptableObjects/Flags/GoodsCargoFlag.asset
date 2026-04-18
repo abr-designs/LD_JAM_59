@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5445caed27d671429e7cb8f7574a6bc, type: 3}
+  m_Name: GoodsCargoFlag
+  m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.FlagDefinition
+  type: 3
+  flag: 3
+  sprite: {fileID: 1950373242, guid: 5d40bb6b6aa544f43a001857f9d71a05, type: 3}
+  description: Holding Goods

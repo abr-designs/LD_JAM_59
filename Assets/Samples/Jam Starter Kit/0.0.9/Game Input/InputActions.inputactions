@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputActions",
     "maps": [
         {
@@ -49,6 +50,24 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MouseHorizontalDelta",
+                    "type": "Value",
+                    "id": "a7dcc980-d4ec-4db5-b484-532cdd872e0e",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseVerticalDelta",
+                    "type": "Value",
+                    "id": "e876a573-debe-4cc0-b411-d8290f7e2ae8",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -148,6 +167,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Mouse Right Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ea9ce50-ceb4-4d9a-bc79-1faf91e77fdc",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseHorizontalDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ec38da8-5bbf-4fd9-80db-649e20ef5f50",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseVerticalDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
