@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.FlagDefinition
   type: 1
   flag: 6
-  sprite: {fileID: -9440777, guid: 5d40bb6b6aa544f43a001857f9d71a05, type: 3}
+  sprite: {fileID: 21300000, guid: 85f94f11143474c4fbbb92abdddc455c, type: 3}
+  texture: {fileID: 2800000, guid: 85f94f11143474c4fbbb92abdddc455c, type: 3}
   description: Yellow Ship
