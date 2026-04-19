@@ -32,6 +32,7 @@ namespace Prototypes.Alex
         public FLAG_TYPE type;
         public FLAG flag;
         public Sprite sprite;
+        public Texture2D texture;
         public string description;
     }
 }

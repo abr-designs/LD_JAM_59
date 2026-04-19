@@ -49,13 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.PlayerFlagHoist
   maxFlags: 3
-  flagPrefab: {fileID: 8030972069811473040, guid: e8774b60c306c0b4eb0749096b84b08c, type: 3}
+  flagPrefab: {fileID: 2299980212367287205, guid: e64a6c1061ca7be458e4577ff9b9d49a, type: 3}
+  duration: 1.5
   flagSize: 0.75
   flagSpawnPosition: {x: -0.1, y: 0, z: 0}
   targetPosition: {x: -0.1, y: 2.94, z: 0}
   spacing: 0.25
   moveSpeed: 0
-  duration: 1.5
   targetXOffset: 9
   ropeTargetRenderer: {fileID: 513866025271512600}
   textureName: _MainTex

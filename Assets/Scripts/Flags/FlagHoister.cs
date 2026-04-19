@@ -11,7 +11,7 @@ public class FlagHoister : MonoBehaviour
     public IReadOnlyList<FLAG> CurrentFlags { get; private set; }
 
     public int maxFlags;
-    public SpriteRenderer flagPrefab;
+    public GameObject flagPrefab;
     public float duration = 5.0f;
     public float flagSize;
     public Vector3 flagSpawnPosition;
@@ -20,7 +20,7 @@ public class FlagHoister : MonoBehaviour
     public float moveSpeed;
 
 
-    private List<SpriteRenderer> m_activeFlagRenderers;
+    private List<GameObject> m_activeFlagRenderers;
 
     private static GameFlowManager s_gameFlowManager;
 
@@ -30,7 +30,7 @@ public class FlagHoister : MonoBehaviour
         if (s_gameFlowManager == null)
             s_gameFlowManager = FindAnyObjectByType<GameFlowManager>();
 
-        m_activeFlagRenderers = new List<SpriteRenderer>();
+        m_activeFlagRenderers = new List<GameObject>();
 
 
     }
@@ -68,18 +68,14 @@ public class FlagHoister : MonoBehaviour
 
             var startPos = flagSpawnPosition;
 
-            var flagSpriteRenderer = Instantiate(
+            var flagGameObject = Instantiate(
                 flagPrefab,
                 transform.TransformPoint(startPos),
                 Quaternion.identity,
                 transform);
+            flagGameObject.GetComponentInChildren<MeshRenderer>().material.mainTexture = flag.GetTexture();
 
-
-
-
-            flagSpriteRenderer.sprite = flag.GetSprite();
-
-            m_activeFlagRenderers.Add(flagSpriteRenderer);
+            m_activeFlagRenderers.Add(flagGameObject);
         }
 
         float elapsed = 0f;
