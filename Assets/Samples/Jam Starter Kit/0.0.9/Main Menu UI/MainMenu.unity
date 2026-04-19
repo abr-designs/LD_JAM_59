@@ -1199,6 +1199,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3889470561879482652, guid: 9ae64bdf400f3ac4280958bd36b23f62, type: 3}
+      propertyPath: musicAudioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: ce08768a569db8b429bc3e45071f1f19, type: 2}
+    - target: {fileID: 3889470561879482652, guid: 9ae64bdf400f3ac4280958bd36b23f62, type: 3}
       propertyPath: musicDatas.Array.size
       value: 1
       objectReference: {fileID: 0}

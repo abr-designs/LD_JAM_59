@@ -12,6 +12,7 @@ namespace Prototypes.Alex.Boats
     [RequireComponent(typeof(BoatFlagHoist))]
     public class BaseBoat : MonoBehaviour
     {
+        public static List<BaseBoat> AllBoats = new List<BaseBoat>();
         //public static event Action<BaseBoat> OnDocked;
         public static event Action OnNoMoreBoats;
         private static int s_boatCount;
@@ -138,8 +139,10 @@ namespace Prototypes.Alex.Boats
                             break;
 
                         if (distance < 1f)
+                        {
                             //Otherwise just move towards the docks
                             SetState(STATE.MOVING_TO_DOCK);
+                        }
                     }
 
                     break;
@@ -151,7 +154,8 @@ namespace Prototypes.Alex.Boats
                     var distance = planar.magnitude;
                     if (distance < 10f)
                     {
-                        s_dockManager.RequestToDock(dockTarget, this);
+                        if (s_dockManager.RequestToDock(dockTarget, this))
+                            isDocked = true;
                         SetState(STATE.NONE);
                     }
 
@@ -189,7 +193,8 @@ namespace Prototypes.Alex.Boats
             switch (state)
             {
                 case STATE.MOVING_TO_DOCK when !m_approvedDocking:
-                    m_moveTarget = s_dockManager.GetRandomDockAvailableTransform();
+                    dockTarget = s_dockManager.GetRandomDockAvailableDock();
+                    m_moveTarget = s_dockManager.GetDockTransform(dockTarget);
                     
                     boatFlagHoist.StartListeningForPlayerFlags();
                     break;
@@ -252,6 +257,26 @@ namespace Prototypes.Alex.Boats
             }
             
             return false;
+        }
+
+        public static bool HasActiveBoat(FLAG shipType, FLAG cargoType)
+        {
+            for (int i = 0; i < AllBoats.Count; i++)
+            {
+                var boat = AllBoats[i];
+                if (boat.shipType == shipType && !boat.isDocked)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static void CleanBoats()
+        {
+            for (int i = AllBoats.Count; i >= 0 ; i++)
+            {
+                Destroy(AllBoats[i].gameObject);
+            }
         }
         
         //Unity Editor Functions

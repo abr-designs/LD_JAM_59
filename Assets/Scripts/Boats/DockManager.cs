@@ -14,7 +14,7 @@ namespace Prototypes.Alex.Boats
         [Serializable]
         private class DockData
         {
-            public bool IsFull => boats.Count >= maxCapacity;
+            public bool IsFull => maxCapacity == 0 || boats.Count >= maxCapacity;
             
             public FLAG dock;
             public Transform dockTransform;
@@ -57,10 +57,10 @@ namespace Prototypes.Alex.Boats
             return true;
         }
 
-        public Transform GetRandomDockAvailableTransform()
+        public FLAG GetRandomDockAvailableDock()
         {
             var freeSpots =  docks.Where(d => d.IsFull);
-            return freeSpots.Random().dockTransform;
+            return freeSpots.Random().dock;
         }
         public Transform GetDockTransform(FLAG dock)
         {

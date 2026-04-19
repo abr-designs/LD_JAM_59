@@ -48,7 +48,7 @@ MonoBehaviour:
   maxFlags: 4
   flagPrefab: {fileID: 2299980212367287205, guid: e64a6c1061ca7be458e4577ff9b9d49a, type: 3}
   duration: 1
-  flagSize: 2
+  flagSize: 1.4
   flagSpawnPosition: {x: -0.1, y: 0, z: 0}
   targetPosition: {x: -0.1, y: 2.94, z: 0}
   spacing: 0.1

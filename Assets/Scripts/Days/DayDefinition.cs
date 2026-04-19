@@ -10,6 +10,8 @@ namespace Prototypes.Alex.Days
         public int shipSpawnCount;
         public float shipSpawnIntervalMin;
         public float shipSpawnIntervalMax;
+        [Min(0f)]
+        public float startDelay;
         
         public List<ShipSpawnData> shipSpawnData;
         public List<RuleData> rules;
@@ -17,8 +19,12 @@ namespace Prototypes.Alex.Days
 
         public void SpawnRandomShip()
         {
-            //shipSpawnCount++;
             var shipData = GetRandomShipSpawnData();
+
+            while (BaseBoat.HasActiveBoat(shipData.ShipType, shipData.CargoType))
+            {
+                shipData = GetRandomShipSpawnData();
+            }
             
             BoatFactory.SpawnBoat(shipData);
         }

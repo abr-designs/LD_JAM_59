@@ -64,6 +64,8 @@ namespace Prototypes.Alex
                     playerCamera.gameObject.SetActive(true);
                 }, null);
 
+                yield return new WaitForSeconds(dayDefinition.startDelay);
+
                 var spawnShipsCoroutine = StartCoroutine(SpawnShips(dayDefinition));
 
                 var isDone = false;
@@ -73,7 +75,7 @@ namespace Prototypes.Alex
                 yield return new WaitUntil(() => isDone);
 
                 StopCoroutine(spawnShipsCoroutine);
-                
+                BaseBoat.CleanBoats();
                 yield return ScreenFader.FadeOut(0.5f, null);
                 
                 continue;

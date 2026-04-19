@@ -15,6 +15,7 @@ MonoBehaviour:
   shipSpawnCount: 1
   shipSpawnIntervalMin: 5
   shipSpawnIntervalMax: 20
+  startDelay: 30
   shipSpawnData:
   - spawnWeight: 1
     shipType: 6

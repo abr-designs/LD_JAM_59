@@ -597,8 +597,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.QuakeController
   mouseSensitivity: 0.25
   playerCamera: {fileID: 2475897137313906966}
-  maxSpeed: 10
-  groundAcceleration: 30
+  maxSpeed: 7
+  groundAcceleration: 25
   airAcceleration: 20
   friction: 8
   jumpForce: 8
