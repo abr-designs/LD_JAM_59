@@ -1614,6 +1614,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 299706a8674764846a247391a764f146, type: 3}
+--- !u!1 &1749706650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8895609767971739348, guid: 082b39666697d1e4bb9aff1fea66b54e, type: 3}
+  m_PrefabInstance: {fileID: 4434058947904617515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1876802726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6672465572106886545, guid: 33e960e697d62e94b84210461de8de79, type: 3}
@@ -1968,6 +1973,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 964254339}
     m_Modifications:
+    - target: {fileID: 2332947686044956263, guid: 082b39666697d1e4bb9aff1fea66b54e, type: 3}
+      propertyPath: pulley
+      value: 
+      objectReference: {fileID: 1749706650}
+    - target: {fileID: 2332947686044956263, guid: 082b39666697d1e4bb9aff1fea66b54e, type: 3}
+      propertyPath: targetZRotation
+      value: -360
+      objectReference: {fileID: 0}
     - target: {fileID: 2584196780333294720, guid: 082b39666697d1e4bb9aff1fea66b54e, type: 3}
       propertyPath: m_Name
       value: PlayerFlag
