@@ -70,7 +70,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5d79d3f8e1d1631408e26311f3cae55f, type: 2}
     - target: {fileID: 919132149155446097, guid: a7d085c0e3f9505429d9de449e9295f1, type: 3}
       propertyPath: m_Name
-      value: Flag
+      value: MeshFlagPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042023225869285003, guid: a7d085c0e3f9505429d9de449e9295f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.509
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042023225869285003, guid: a7d085c0e3f9505429d9de449e9295f1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
