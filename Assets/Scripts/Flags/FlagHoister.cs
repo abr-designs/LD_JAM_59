@@ -71,8 +71,11 @@ public class FlagHoister : MonoBehaviour
             var flagGameObject = Instantiate(
                 flagPrefab,
                 transform.TransformPoint(startPos),
-                Quaternion.identity,
+                transform.rotation,
                 transform);
+            
+            flagGameObject.transform.localRotation = Quaternion.identity;
+            flagGameObject.transform.localScale = Vector3.one * flagSize;
             flagGameObject.GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = flag.GetTexture();
 
             m_activeFlagRenderers.Add(flagGameObject);
