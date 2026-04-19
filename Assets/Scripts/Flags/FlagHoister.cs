@@ -9,29 +9,32 @@ public class FlagHoister : MonoBehaviour
 {
     public event Action<IReadOnlyList<FLAG>> OnFlagsChanged;
     public IReadOnlyList<FLAG> CurrentFlags { get; private set; }
-    
+
     public int maxFlags;
     public SpriteRenderer flagPrefab;
-
+    public float duration = 5.0f;
     public float flagSize;
     public Vector3 flagSpawnPosition;
     public Vector3 targetPosition;
     public float spacing;
     public float moveSpeed;
 
+
     private List<SpriteRenderer> m_activeFlagRenderers;
-    
+
     private static GameFlowManager s_gameFlowManager;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-        if(s_gameFlowManager == null) 
+        if (s_gameFlowManager == null)
             s_gameFlowManager = FindAnyObjectByType<GameFlowManager>();
 
         m_activeFlagRenderers = new List<SpriteRenderer>();
+
+
     }
-    
+
     public void HoistFlags(List<FLAG> flags)
     {
         if (m_activeFlagRenderers.Count > 0)
@@ -41,46 +44,70 @@ public class FlagHoister : MonoBehaviour
 
         if (flags.Count == 0)
             return;
-        
+
         CurrentFlags = new List<FLAG>(flags);
         StartCoroutine(HoistFlagsCoroutine(flags));
     }
 
     public void RemoveFlags()
     {
-        if (m_activeFlagRenderers.Count == 0) 
+        if (m_activeFlagRenderers.Count == 0)
             return;
-        
+
         StartCoroutine(RemoveFlagsCoroutine());
     }
 
     private IEnumerator HoistFlagsCoroutine(List<FLAG> flags)
     {
         var dir = (flagSpawnPosition - targetPosition).normalized;
-        
+
+
         for (int i = 0; i < flags.Count; i++)
         {
             var flag = flags[i];
-            var pos = targetPosition +  (dir * ((flagSize / 2f) + (spacing * i) + (i * flagSize)));
-            
-            var flagSpriteRenderer = Instantiate(flagPrefab, 
-                transform.TransformPoint(pos), 
-                Quaternion.identity, 
+
+            var startPos = flagSpawnPosition;
+
+            var flagSpriteRenderer = Instantiate(
+                flagPrefab,
+                transform.TransformPoint(startPos),
+                Quaternion.identity,
                 transform);
 
+
+
+
             flagSpriteRenderer.sprite = flag.GetSprite();
-            
+
             m_activeFlagRenderers.Add(flagSpriteRenderer);
         }
-        
-        OnFlagsChanged?.Invoke(CurrentFlags);
-        
+
+        float elapsed = 0f;
+
+
+        while (elapsed < duration)
+        {
+
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            for (int i = 0; i < m_activeFlagRenderers.Count; i++)
+            {
+                var targetPos = targetPosition + (dir * ((flagSize / 2f) + (spacing * i) + (i * flagSize)));
+                // Smooth interpolation
+                var currentPos = Vector3.Lerp(flagSpawnPosition, targetPos, t);
+                m_activeFlagRenderers[i].transform.position = transform.TransformPoint(currentPos);
+            }
+            yield return null; // wait one frame
+
+
+        }
         yield break;
     }
-    
+
     private IEnumerator RemoveFlagsCoroutine()
     {
-        for (int i = m_activeFlagRenderers.Count - 1; i >= 0 ; i--)
+        for (int i = m_activeFlagRenderers.Count - 1; i >= 0; i--)
         {
             Destroy(m_activeFlagRenderers[i].gameObject);
             m_activeFlagRenderers.RemoveAt(i);
@@ -88,7 +115,7 @@ public class FlagHoister : MonoBehaviour
 
         CurrentFlags = new List<FLAG>();
         m_activeFlagRenderers.Clear();
-        
+
         yield break;
     }
 
