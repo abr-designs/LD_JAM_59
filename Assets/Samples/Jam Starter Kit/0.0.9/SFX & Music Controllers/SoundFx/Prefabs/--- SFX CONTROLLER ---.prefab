@@ -178,8 +178,9 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 6565548158353040769}
   sfxSourcePrefab: {fileID: 144211660340659278, guid: c7877577d67448743b4632fe48819da7, type: 3}
   sfxDatas:
-  - name: NONE
+  - name: BELL_RING
     type: 0
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 7ee6118706ece134e834ee61e161bcb9, type: 3}
     volume: 0
-    maxPlaying: 0
+    maxPlaying: 3

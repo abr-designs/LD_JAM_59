@@ -68,6 +68,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bc91aa81b2ec91c42bfe095ba1d841fe, type: 2}
   - {fileID: 11400000, guid: b0bc420cd9c711c468f93efb9145e352, type: 2}
   - {fileID: 11400000, guid: 4de3efa47247e944f8ef637090f34a86, type: 2}
+  waitCamera: {fileID: 0}
+  playerCamera: {fileID: 0}
 --- !u!1001 &266297059267958827
 PrefabInstance:
   m_ObjectHideFlags: 0
