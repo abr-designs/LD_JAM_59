@@ -55,7 +55,7 @@ MonoBehaviour:
   maxFlags: 3
   flagPrefab: {fileID: 2299980212367287205, guid: e64a6c1061ca7be458e4577ff9b9d49a, type: 3}
   duration: 1.5
-  flagSize: 0.75
+  flagSize: 1
   flagSpawnPosition: {x: -0.5, y: -1.45, z: -0.08}
   targetPosition: {x: -0.5, y: 2.94, z: -0.08}
   spacing: 0.25
@@ -83,8 +83,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4002552, y: 0.41249466, z: 0.4124956}
-  m_Center: {x: 0, y: -1.0342522, z: 0}
+  m_Size: {x: 0.96507907, y: 0.85400224, z: 1.0465833}
+  m_Center: {x: -0.0000004849272, y: -1.0342522, z: 0.31704387}
 --- !u!1 &4886017789406230042
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,7 +558,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 043c1792c70beb445bb649af2045c398, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -602,7 +602,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

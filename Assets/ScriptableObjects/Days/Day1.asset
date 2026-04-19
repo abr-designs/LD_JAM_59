@@ -22,5 +22,11 @@ MonoBehaviour:
   rules: []
   dockRequirements:
   - targetDock: 10
+    cargoType: 2
+    cargoCount: 1
+  - targetDock: 12
+    cargoType: 3
+    cargoCount: 1
+  - targetDock: 13
     cargoType: 3
     cargoCount: 1

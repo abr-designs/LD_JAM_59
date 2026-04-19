@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Flags;
 using NaughtyAttributes;
 using Prototypes.Alex.Days;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace Prototypes.Alex.Boats
             
             public FLAG dock;
             public Transform dockTransform;
+            public DockFlagHoist dockFlagHoist;
+            
             [Space(10f)]
             [ReadOnly]
             public FLAG cargoType;
@@ -69,6 +72,11 @@ namespace Prototypes.Alex.Boats
 
         public void SetupDocks(IReadOnlyList<DockRequirementData> dockRequirements)
         {
+            foreach (var dock in docks)
+            {
+                dock.dockFlagHoist.RemoveFlags();
+            }
+            
             foreach (var dockRequirement in dockRequirements)
             {
                 var dock = docks.First(d => d.dock == dockRequirement.targetDock);
@@ -76,7 +84,7 @@ namespace Prototypes.Alex.Boats
                 dock.maxCapacity = dockRequirement.cargoCount;
                 dock.boats.Clear();
                 dock.cargoType = dockRequirement.cargoType;
-                
+                dock.dockFlagHoist.SetupDock(dock.dock, dockRequirement);
             }
         }
 
