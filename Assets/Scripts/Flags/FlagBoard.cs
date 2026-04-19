@@ -36,7 +36,7 @@ namespace Prototypes.Alex
                 FlagBoardItem item = Instantiate(flagBoardItemPrefab, transform);
                 item.gameObject.name = $"{flagDefinitions[i].name}_{nameof(FlagBoardItem)}_instance";
                 item.transform.localPosition = localPosition + startPositionOffset;
-                item.transform.localScale = Vector3.one * itemScale;
+                item.transform.localScale = flagBoardItemPrefab.transform.localScale * itemScale;
                 item.Setup(interactable, flagDefinitions[i]);
             }
         }

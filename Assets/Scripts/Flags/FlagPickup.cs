@@ -2,6 +2,7 @@
 using NaughtyAttributes;
 using Prototypes.Alex.Interactables;
 using UnityEngine;
+using Utilities.Animations;
 
 namespace Prototypes.Alex
 {
@@ -14,6 +15,9 @@ namespace Prototypes.Alex
         private FLAG flagType;
         
         private SpriteRenderer spriteRenderer;
+
+        [SerializeField]
+        private TransformAnimator transformAnimator;
 
         private void Start()
         {
@@ -33,6 +37,9 @@ namespace Prototypes.Alex
         {
             s_playerFlagInventory.HoldFlag(flagType);
             s_fpsHandsController.SetState(FPSHandsController.HandState.Grabbing);
+            
+            if(transformAnimator != null)
+                transformAnimator.Play();
         }
     }
 }
