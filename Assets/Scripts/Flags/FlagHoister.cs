@@ -73,7 +73,7 @@ public class FlagHoister : MonoBehaviour
                 transform.TransformPoint(startPos),
                 Quaternion.identity,
                 transform);
-            flagGameObject.GetComponentInChildren<MeshRenderer>().material.mainTexture = flag.GetTexture();
+            flagGameObject.GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = flag.GetTexture();
 
             m_activeFlagRenderers.Add(flagGameObject);
         }
