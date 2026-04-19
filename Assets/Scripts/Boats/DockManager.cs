@@ -4,6 +4,7 @@ using System.Linq;
 using NaughtyAttributes;
 using Prototypes.Alex.Days;
 using UnityEngine;
+using UnityUtils;
 
 namespace Prototypes.Alex.Boats
 {
@@ -30,6 +31,9 @@ namespace Prototypes.Alex.Boats
         [SerializeField]
         private List<DockData> docks = new();
 
+        
+        public Transform portEntranceTransform;
+
         //Ship Behaviours
         //================================================================================================================//
 
@@ -50,6 +54,11 @@ namespace Prototypes.Alex.Boats
             return true;
         }
 
+        public Transform GetRandomDockAvailableTransform()
+        {
+            var freeSpots =  docks.Where(d => d.IsFull);
+            return freeSpots.Random().dockTransform;
+        }
         public Transform GetDockTransform(FLAG dock)
         {
             return docks.First(d => d.dock == dock).dockTransform;

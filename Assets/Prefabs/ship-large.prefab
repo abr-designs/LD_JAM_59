@@ -87,6 +87,12 @@ MonoBehaviour:
   shipType: 0
   cargoType: 0
   isDocked: 0
+  boatMoveSpeed: 5
+  startingState: 3
+  state: 0
+  boatFlagHoist: {fileID: 7240537667619822688}
+  minDistanceThreshold: 75
+  inRangeOfTower: 0
 --- !u!114 &7240537667619822688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,13 +112,4 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 11.02, z: 0}
   spacing: 0.16
   moveSpeed: 0
-  boatType: 5
-  carryingFlag: 3
-  minDistanceThreshold: 75
-  inRangeOfTower: 0
   presentFlagsOnStart: 
-  moveToTargetTransform: {fileID: 0}
-  moveToDockTargetTransform: {fileID: 0}
-  boatMoveSpeed: 6
-  startingState: 3
-  state: 0

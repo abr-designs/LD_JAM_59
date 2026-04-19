@@ -17,7 +17,7 @@ namespace Prototypes.Alex.Days
 
         public void SpawnRandomShip()
         {
-            shipSpawnCount++;
+            //shipSpawnCount++;
             var shipData = GetRandomShipSpawnData();
             
             BoatFactory.SpawnBoat(shipData);

@@ -1,67 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2668287370168597221
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7125869325777585634}
-  m_Layer: 0
-  m_Name: Dock1
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7125869325777585634
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2668287370168597221}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -147, y: 0, z: 63.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7091563899391594575}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3316193454752494359
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5709405347289715129}
-  m_Layer: 0
-  m_Name: Dock2
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5709405347289715129
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3316193454752494359}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -132.5, y: 0, z: 89.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7091563899391594575}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6584864942426160763
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +35,7 @@ Transform:
   - {fileID: 3300697119106237473}
   - {fileID: 6134136069537020362}
   - {fileID: 7091563899391594575}
+  - {fileID: 3016625629303494313}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7655224107956450014
@@ -111,7 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f62c8d6796c4a3183d5b1064325567d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.GameFlowManager
-  boat: {fileID: 0}
+  dockManager: {fileID: 2816709032197301035}
+  bulletinManager: {fileID: 4149692439369661292}
+  dayDefinitions:
+  - {fileID: 11400000, guid: f26f1b50ac7eead468e0a93665144fb9, type: 2}
   flagDefinitions:
   - {fileID: 11400000, guid: 2638a6dcd0aae924eae447fa7de60abf, type: 2}
   - {fileID: 11400000, guid: d202f351783551544894acb065c76494, type: 2}
@@ -126,37 +68,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bc91aa81b2ec91c42bfe095ba1d841fe, type: 2}
   - {fileID: 11400000, guid: b0bc420cd9c711c468f93efb9145e352, type: 2}
   - {fileID: 11400000, guid: 4de3efa47247e944f8ef637090f34a86, type: 2}
---- !u!1 &7352363716829538245
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 89201893257185185}
-  m_Layer: 0
-  m_Name: Dock3
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &89201893257185185
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7352363716829538245}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -96.1, y: 0, z: 116.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7091563899391594575}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &266297059267958827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,6 +130,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3694712651037012485, guid: 299706a8674764846a247391a764f146, type: 3}
   m_PrefabInstance: {fileID: 266297059267958827}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1903964427310607270
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5185950440957327888}
+    m_Modifications:
+    - target: {fileID: 3626485565439827142, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_Name
+      value: --- BULLETIN MANAGER ---
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+--- !u!4 &3016625629303494313 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3724767755412274447, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+  m_PrefabInstance: {fileID: 1903964427310607270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4149692439369661292 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2592550314885550282, guid: b054c128493a5c64fbbf70a7602f343c, type: 3}
+  m_PrefabInstance: {fileID: 1903964427310607270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd946b1b4f94a61a103b6f4ebade535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.Days.BulletinManager
 --- !u!1001 &4520316230949513562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -399,32 +383,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: --- DOCK MANAGER ---
       objectReference: {fileID: 0}
-    - target: {fileID: 7968590064438928841, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: docks.Array.data[0].dockTransform
-      value: 
-      objectReference: {fileID: 7125869325777585634}
-    - target: {fileID: 7968590064438928841, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: docks.Array.data[1].dockTransform
-      value: 
-      objectReference: {fileID: 5709405347289715129}
-    - target: {fileID: 7968590064438928841, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: docks.Array.data[2].dockTransform
-      value: 
-      objectReference: {fileID: 89201893257185185}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3164517929772357293, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7125869325777585634}
-    - targetCorrespondingSourceObject: {fileID: 3164517929772357293, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5709405347289715129}
-    - targetCorrespondingSourceObject: {fileID: 3164517929772357293, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 89201893257185185}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
+--- !u!114 &2816709032197301035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7968590064438928841, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
+  m_PrefabInstance: {fileID: 5296492102217615074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae26f54241b04e238b0f7f8373bb5c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.Boats.DockManager
 --- !u!4 &7091563899391594575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3164517929772357293, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}

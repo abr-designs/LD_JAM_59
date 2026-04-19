@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Prototypes.Alex.Boats;
+using Prototypes.Alex.Days;
 using UnityEngine;
+using Utilities;
+using Random = UnityEngine.Random;
 
 namespace Prototypes.Alex
 {
     public class GameFlowManager : MonoBehaviour
     {
-        [SerializeField]
-        private Transform boat;
+        [SerializeField, Header("Managers")]
+        private DockManager dockManager;
         
         [SerializeField]
+        private BulletinManager bulletinManager;
+        
+        [SerializeField, Header("Days")]
+        private List<DayDefinition> dayDefinitions;
+        
+        [SerializeField, Header("Flags")]
         private List<FlagDefinition> flagDefinitions;
         private Dictionary<FLAG, FlagDefinition> m_flags;
+
+        
 
         private void Start()
         {
@@ -21,20 +33,56 @@ namespace Prototypes.Alex
             {
                 m_flags.Add(flagDefinition.flag, flagDefinition);
             }
+            
+            StartCoroutine(GameLoopCoroutine());
         }
 
         private IEnumerator GameLoopCoroutine()
         {
-            //TODO Boat moves towards the port
-            //TODO Player signals the boat
-            //TODO Process outgoing message when within range
-            //TODO Boat responds to the signal
-            //TODO Player decodes signals
-            //TODO Player Responds
-            //TODO Process outgoing message
-            //TODO Boat responds to the signal
+            foreach (var dayDefinition in dayDefinitions)
+            {
+                ScreenFader.ForceSetColorBlack();
+                
+                dockManager.SetupDocks(dayDefinition.dockRequirements);
+                bulletinManager.Setup(dayDefinition.dockRequirements, dayDefinition.rules);
+                
+                yield return ScreenFader.FadeIn(0.5f, null);
+
+                yield return new WaitForSeconds(Random.Range(10f, 15f));
+
+                var spawnShipsCoroutine = StartCoroutine(SpawnShips(dayDefinition));
+
+                var isDone = false;
+                DockManager.DocksFull += OnDocksFull;
+                BaseBoat.OnNoMoreBoats += OnDocksFull;
+
+                yield return new WaitUntil(() => isDone);
+
+                StopCoroutine(spawnShipsCoroutine);
+                
+                yield return ScreenFader.FadeOut(0.5f, null);
+                
+                continue;
+
+                void OnDocksFull()
+                {
+                    DockManager.DocksFull -= OnDocksFull;
+                    isDone = true;
+                }
+            }
             
-            yield return null;
+            //TODO Move to the win screen
+        }
+
+        private static IEnumerator SpawnShips(DayDefinition dayDefinition)
+        {
+            for (int i = 0; i < dayDefinition.shipSpawnCount; i++)
+            {
+                dayDefinition.SpawnRandomShip();
+                
+                var wait = Random.Range(dayDefinition.shipSpawnIntervalMin, dayDefinition.shipSpawnIntervalMax);
+                yield return new WaitForSeconds(wait);
+            }
         }
         
         //Utility Functions
