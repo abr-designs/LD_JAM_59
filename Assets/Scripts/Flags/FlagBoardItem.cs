@@ -24,8 +24,12 @@ namespace Prototypes.Alex
                 m_collider.enabled = false;
             }
             
-            flagPickup.Setup(flagDefinition);
-            flagText.text = flagDefinition.description;
+            if(interactable)
+                flagPickup.Setup(flagDefinition);
+            
+            if(flagText != null)
+                flagText.text = flagDefinition.description;
+            
             flagSprite.sprite = flagDefinition.sprite;
         }
 
