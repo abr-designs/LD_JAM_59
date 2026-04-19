@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7619610338956544311}
   - component: {fileID: 8030972069811473040}
   m_Layer: 0
-  m_Name: FlagPrefab
+  m_Name: SpriteFlagPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

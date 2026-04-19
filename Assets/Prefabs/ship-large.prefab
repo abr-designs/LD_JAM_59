@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.BoatFlagHoist
   maxFlags: 3
-  flagPrefab: {fileID: 8030972069811473040, guid: e8774b60c306c0b4eb0749096b84b08c, type: 3}
+  flagPrefab: {fileID: 2299980212367287205, guid: e64a6c1061ca7be458e4577ff9b9d49a, type: 3}
+  duration: 5
   flagSize: 0.71
   flagSpawnPosition: {x: 0, y: 8.61, z: 0}
   targetPosition: {x: 0, y: 11.02, z: 0}
