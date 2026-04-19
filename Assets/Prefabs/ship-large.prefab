@@ -108,7 +108,7 @@ MonoBehaviour:
   shipType: 0
   cargoType: 0
   isDocked: 0
-  boatMoveSpeed: 5
+  boatMoveSpeed: 10
   startingState: 3
   state: 0
   boatFlagHoist: {fileID: 7240537667619822688}
