@@ -33,6 +33,7 @@ namespace Prototypes.Alex.Boats
         private static DockManager s_dockManager;
         
         private Transform m_moveTarget;
+        private FLAG dockTarget;
 
         //================================================================================================================//
 
@@ -121,6 +122,7 @@ namespace Prototypes.Alex.Boats
                 case STATE.NONE:
                     break;
                 case STATE.MOVING_TO_PORT:
+                {
                     MoveTowards(m_moveTarget.position);
 
                     var planar = Vector3.ProjectOnPlane(transform.position - m_moveTarget.position, Vector3.up);
@@ -128,9 +130,9 @@ namespace Prototypes.Alex.Boats
                     if (distance < minDistanceThreshold)
                     {
                         inRangeOfTower = true;
-                        
+
                         //If arriving in range, and player flags are visible, react to it 
-                        if (boatFlagHoist.PlayerHasFlagsForMe(out var results) && 
+                        if (boatFlagHoist.PlayerHasFlagsForMe(out var results) &&
                             ProcessCommunicationForMe(results))
                             break;
 
@@ -138,10 +140,22 @@ namespace Prototypes.Alex.Boats
                             //Otherwise just move towards the docks
                             SetState(STATE.MOVING_TO_DOCK);
                     }
+
                     break;
+                }
                 case STATE.MOVING_TO_DOCK:
+                {
                     MoveTowards(m_moveTarget.position);
+                    var planar = Vector3.ProjectOnPlane(transform.position - m_moveTarget.position, Vector3.up);
+                    var distance = planar.magnitude;
+                    if (distance < 10f)
+                    {
+                        s_dockManager.RequestToDock(dockTarget, this);
+                        SetState(STATE.NONE);
+                    }
+
                     break;
+                }
                 case STATE.AWAITING_PLAYER_FLAGS:
                     break;
                 case STATE.RESPONDING:
@@ -229,9 +243,10 @@ namespace Prototypes.Alex.Boats
                 case FLAG.MOVE_TO_B when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
                 case FLAG.MOVE_TO_C when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
                     m_approvedDocking = true;
-                    m_moveTarget = s_dockManager.GetDockTransform(flagCommsResults.Action);
+                    dockTarget = flagCommsResults.Action;
+                    m_moveTarget = s_dockManager.GetDockTransform(dockTarget);
                     SetState(STATE.MOVING_TO_DOCK);
-                    boatFlagHoist.HoistFlags(new List<FLAG>() {cargoType, flagCommsResults.Action });
+                    boatFlagHoist.HoistFlags(new List<FLAG>() {cargoType, dockTarget });
                     return true;
             }
             

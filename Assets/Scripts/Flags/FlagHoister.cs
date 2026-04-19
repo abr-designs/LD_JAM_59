@@ -98,7 +98,8 @@ public class FlagHoister : MonoBehaviour
 
 
         }
-        yield break;
+        
+        OnFlagsChanged?.Invoke(CurrentFlags);
     }
 
     private IEnumerator RemoveFlagsCoroutine()
