@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Audio;
 using Audio.SoundFX;
 using NaughtyAttributes;
+using Prototypes.Alex.Utilities;
 using UnityEngine;
 using Utilities.Debugging;
 
@@ -18,6 +19,9 @@ namespace Prototypes.Alex.Boats
         public FLAG CargoType => cargoType;
         public FLAG ShipType => shipType;
         public bool IsDocked => isDocked;
+        
+        [SerializeField]
+        private Renderer[] flagRenderers;
         
         [SerializeField, ReadOnly] 
         private FLAG shipType;
@@ -75,7 +79,15 @@ namespace Prototypes.Alex.Boats
             this.shipType = shipType;
             this.cargoType = cargoType;
             isDocked = false;
-            
+
+            var mat = flagRenderers[0].material;
+            mat.mainTexture = shipType.GetTexture();
+            for (var i = 1; i < flagRenderers.Length; i++)
+            {
+                var flagRenderer = flagRenderers[i];
+                flagRenderer.sharedMaterial = mat;
+            }
+
             m_moveTarget = s_dockManager.portEntranceTransform;
             
             boatFlagHoist.ProcessCommunicationForMe = ProcessCommunicationForMe;

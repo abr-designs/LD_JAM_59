@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9173195763934475305, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ae815a42c15e954f89a0b3dcbcfd87d, type: 2}
     - target: {fileID: -8679921383154817045, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 41.1
@@ -56,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ship-large
       objectReference: {fileID: 0}
+    - target: {fileID: 6574771330368568952, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ae815a42c15e954f89a0b3dcbcfd87d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67,6 +75,16 @@ PrefabInstance:
       insertIndex: 2
       addedObject: {fileID: 7240537667619822688}
   m_SourcePrefab: {fileID: 100100000, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
+--- !u!23 &1930396405170815745 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6574771330368568952, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
+  m_PrefabInstance: {fileID: 4752532346621640057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4703484179076019886 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -9173195763934475305, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
+  m_PrefabInstance: {fileID: 4752532346621640057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5563365201981636648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a3bf7bbd3957c6449952d73c407cdd4e, type: 3}
@@ -84,6 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d254ba2fdd054b22ae4b0958393f4afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.Boats.BaseBoat
+  flagRenderers:
+  - {fileID: 4703484179076019886}
+  - {fileID: 1930396405170815745}
   shipType: 0
   cargoType: 0
   isDocked: 0
