@@ -54,6 +54,9 @@ MonoBehaviour:
   bulletinManager: {fileID: 4149692439369661292}
   dayDefinitions:
   - {fileID: 11400000, guid: f26f1b50ac7eead468e0a93665144fb9, type: 2}
+  - {fileID: 11400000, guid: 9a3de24af7e693240b95c086b223f17d, type: 2}
+  - {fileID: 11400000, guid: f4aa078e46f140a4e95dc93b432a44b4, type: 2}
+  - {fileID: 11400000, guid: 69b56d37f31cafc479c522ffe42e6252, type: 2}
   flagDefinitions:
   - {fileID: 11400000, guid: 2638a6dcd0aae924eae447fa7de60abf, type: 2}
   - {fileID: 11400000, guid: d202f351783551544894acb065c76494, type: 2}
@@ -68,6 +71,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bc91aa81b2ec91c42bfe095ba1d841fe, type: 2}
   - {fileID: 11400000, guid: b0bc420cd9c711c468f93efb9145e352, type: 2}
   - {fileID: 11400000, guid: 4de3efa47247e944f8ef637090f34a86, type: 2}
+  waitCamera: {fileID: 0}
+  playerCamera: {fileID: 0}
 --- !u!1001 &266297059267958827
 PrefabInstance:
   m_ObjectHideFlags: 0

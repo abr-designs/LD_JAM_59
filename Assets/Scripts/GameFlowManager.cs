@@ -24,6 +24,11 @@ namespace Prototypes.Alex
         private List<FlagDefinition> flagDefinitions;
         private Dictionary<FLAG, FlagDefinition> m_flags;
 
+        [SerializeField]
+        private Camera waitCamera;
+        [SerializeField]
+        private Camera playerCamera;
+
         
 
         private void Start()
@@ -42,6 +47,9 @@ namespace Prototypes.Alex
             foreach (var dayDefinition in dayDefinitions)
             {
                 ScreenFader.ForceSetColorBlack();
+
+                waitCamera.gameObject.SetActive(true);
+                playerCamera.gameObject.SetActive(false);
                 
                 dockManager.SetupDocks(dayDefinition.dockRequirements);
                 bulletinManager.Setup(dayDefinition.dockRequirements, dayDefinition.rules);
@@ -49,6 +57,12 @@ namespace Prototypes.Alex
                 yield return ScreenFader.FadeIn(0.5f, null);
 
                 yield return new WaitForSeconds(Random.Range(10f, 15f));
+
+                ScreenFader.FadeInOut(0.5f, () =>
+                {
+                    waitCamera.gameObject.SetActive(false);
+                    playerCamera.gameObject.SetActive(true);
+                }, null);
 
                 var spawnShipsCoroutine = StartCoroutine(SpawnShips(dayDefinition));
 

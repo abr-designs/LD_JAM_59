@@ -81,12 +81,13 @@ namespace Prototypes.Alex.Boats
             this.cargoType = cargoType;
             isDocked = false;
 
-            var mat = flagRenderers[0].material;
+            var mat = flagRenderers[0].materials[1];
             mat.mainTexture = shipType.GetTexture();
             for (var i = 1; i < flagRenderers.Length; i++)
             {
                 var flagRenderer = flagRenderers[i];
-                flagRenderer.sharedMaterial = mat;
+                flagRenderer.sharedMaterials[1] = mat;
+                flagRenderer.sharedMaterials[1].mainTexture = shipType.GetTexture();
             }
 
             m_moveTarget = s_dockManager.portEntranceTransform;
@@ -94,7 +95,7 @@ namespace Prototypes.Alex.Boats
             boatFlagHoist.ProcessCommunicationForMe = ProcessCommunicationForMe;
             boatFlagHoist.boatType = shipType;
             
-            //SFX.BELL_RING.PlaySound();
+            SFX.BELL_RING.PlaySound();
         }
 
         private void OnDestroy()
