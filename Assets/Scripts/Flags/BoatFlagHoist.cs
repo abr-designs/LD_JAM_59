@@ -191,10 +191,12 @@ namespace Prototypes.Alex
                 case FLAG.STOP when inRangeOfTower:
                     SetState(STATE.AWAITING_PLAYER_FLAGS);
                     return true;
-                case FLAG.MOVE_TO when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
+                case FLAG.MOVE_TO_A when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
+                case FLAG.MOVE_TO_B when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
+                case FLAG.MOVE_TO_C when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
                     m_approvedDocking = true;
                     SetState(STATE.MOVING_TO_DOCK);
-                    HoistFlags(new List<FLAG>() {carryingFlag, FLAG.MOVE_TO });
+                    HoistFlags(new List<FLAG>() {carryingFlag, flagCommsResults.Action });
                     return true;
             }
             

@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: flagDefinitions.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[0]'
@@ -43,11 +43,11 @@ PrefabInstance:
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[6]'
       value: 
-      objectReference: {fileID: 11400000, guid: 4de3efa47247e944f8ef637090f34a86, type: 2}
+      objectReference: {fileID: 11400000, guid: 6abb52eb5ab28f1418689c852a43aa1f, type: 2}
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[7]'
       value: 
-      objectReference: {fileID: 11400000, guid: 4de3efa47247e944f8ef637090f34a86, type: 2}
+      objectReference: {fileID: 11400000, guid: 0565854a104a6fd40a439997a474b24f, type: 2}
     - target: {fileID: 2500980144339710325, guid: 33e960e697d62e94b84210461de8de79, type: 3}
       propertyPath: 'flagDefinitions.Array.data[8]'
       value: 

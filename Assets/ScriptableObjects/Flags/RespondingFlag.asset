@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.FlagDefinition
   type: 4
   flag: 0
-  sprite: {fileID: -1898777598, guid: 5d40bb6b6aa544f43a001857f9d71a05, type: 3}
+  sprite: {fileID: 21300000, guid: 6d2c687bf97f4e940adac27b4743c93f, type: 3}
   description: Message Received. Responding
