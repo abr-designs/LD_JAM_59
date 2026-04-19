@@ -10,23 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9768449d66f4f0ea81270a05f09e3ce, type: 3}
-  m_Name: Day1
+  m_Name: Day3
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.Days.DayDefinition
-  shipSpawnCount: 1
+  shipSpawnCount: 6
   shipSpawnIntervalMin: 5
   shipSpawnIntervalMax: 20
   shipSpawnData:
+  - spawnWeight: 2
+    shipType: 5
+    cargoType: 3
+  - spawnWeight: 1
+    shipType: 6
+    cargoType: 2
+  - spawnWeight: 2
+    shipType: 7
+    cargoType: 2
   - spawnWeight: 1
     shipType: 6
     cargoType: 3
-  rules: []
+  rules:
+  - shipType: 6
+    cargoTypes: 3
   dockRequirements:
   - targetDock: 10
     cargoType: 2
-    cargoCount: 1
+    cargoCount: 2
   - targetDock: 12
     cargoType: 3
-    cargoCount: 1
+    cargoCount: 2
   - targetDock: 10
-    cargoType: 3
+    cargoType: 2
     cargoCount: 1
