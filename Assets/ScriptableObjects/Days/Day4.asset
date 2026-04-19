@@ -12,32 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9768449d66f4f0ea81270a05f09e3ce, type: 3}
   m_Name: Day4
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.Days.DayDefinition
-  shipSpawnCount: 6
+  shipSpawnCount: 10
   shipSpawnIntervalMin: 5
   shipSpawnIntervalMax: 20
   shipSpawnData:
-  - spawnWeight: 2
+  - spawnWeight: 1
+    shipType: 5
+    cargoType: 3
+  - spawnWeight: 1
+    shipType: 7
+    cargoType: 2
+  - spawnWeight: 1
     shipType: 5
     cargoType: 3
   - spawnWeight: 1
     shipType: 6
-    cargoType: 2
-  - spawnWeight: 2
+    cargoType: 3
+  - spawnWeight: 1
     shipType: 7
     cargoType: 2
   - spawnWeight: 1
     shipType: 6
-    cargoType: 3
+    cargoType: 2
   rules:
-  - shipType: 6
+  - shipType: 5
     cargoTypes: 3
+  - shipType: 7
+    cargoTypes: 2
   dockRequirements:
   - targetDock: 10
     cargoType: 2
-    cargoCount: 2
+    cargoCount: 3
   - targetDock: 12
     cargoType: 3
-    cargoCount: 2
-  - targetDock: 10
+    cargoCount: 3
+  - targetDock: 13
     cargoType: 2
-    cargoCount: 1
+    cargoCount: 2

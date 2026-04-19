@@ -38,6 +38,6 @@ MonoBehaviour:
   - targetDock: 12
     cargoType: 3
     cargoCount: 2
-  - targetDock: 10
+  - targetDock: 13
     cargoType: 2
     cargoCount: 1
