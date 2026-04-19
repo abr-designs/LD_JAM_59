@@ -7,28 +7,23 @@ public class SnapSideCamera : MonoBehaviour
     public float leftYaw = -60f;
     public float rightYaw = 60f;
 
-    [Header("Input")]
-    public float inputThreshold = 0.2f; // how hard you push before switching sides
-    
-    [Header("Switch Resistance")]
-    public float switchPoint = 0f;       // usually center
-    public float switchDeadZone = 10f;   // how far past center before switching
+    [Header("Input Resistance")]
+    public float switchThreshold = 0.6f; // how much input needed to switch
+    public float inputBuildSpeed = 3f;
+    public float inputDecaySpeed = 2f;
 
     [Header("Smoothing")]
-    public float smoothTime = 0.15f; // lower = snappier
-    public float maxSpeed = 1000f;   // cap for fast snapping
+    public float smoothTime = 0.15f;
+    public float maxSpeed = 1000f;
 
     private float currentYaw;
     private float targetYaw;
     private float velocity;
 
-    private enum Side
-    {
-        Left,
-        Right
-    }
+    private float inputAccum = 0f;
 
-    private Side currentSide = Side.Left;
+    private enum Side { Left, Right }
+    private Side currentSide = Side.Right;
 
     private float m_mouseXDelta;
 
@@ -41,30 +36,37 @@ public class SnapSideCamera : MonoBehaviour
     {
         GameInputDelegator.OnMouseMoved -= OnMouseMoved;
     }
+    private void OnMouseMoved(Vector2 currentDelta)
+    {
+        m_mouseXDelta =  currentDelta.x;
+    }
 
-
-    private void Start()
+    void Start()
     {
         currentYaw = transform.localEulerAngles.y;
         targetYaw = rightYaw;
     }
 
-    private void Update()
+    void Update()
     {
-        // Only allow switching if BOTH input and position agree
-        if (currentSide == Side.Right)
+        // Build input over time (this is the "resistance")
+        inputAccum += m_mouseXDelta * inputBuildSpeed * Time.deltaTime;
+
+        // Decay back toward 0 when not pushing
+        inputAccum = Mathf.Lerp(inputAccum, 0f, inputDecaySpeed * Time.deltaTime);
+
+        inputAccum = Mathf.Clamp(inputAccum, -1f, 1f);
+
+        // Switch sides only when input commitment is strong enough
+        if (inputAccum > switchThreshold)
         {
-            if (m_mouseXDelta < -inputThreshold && currentYaw < (switchPoint - switchDeadZone))
-            {
-                currentSide = Side.Left;
-            }
+            currentSide = Side.Right;
+            inputAccum = 0f; // reset so it doesn't instantly flip back
         }
-        else // currently Left
+        else if (inputAccum < -switchThreshold)
         {
-            if (m_mouseXDelta > inputThreshold && currentYaw > (switchPoint + switchDeadZone))
-            {
-                currentSide = Side.Right;
-            }
+            currentSide = Side.Left;
+            inputAccum = 0f;
         }
 
         targetYaw = (currentSide == Side.Left) ? leftYaw : rightYaw;
@@ -80,8 +82,5 @@ public class SnapSideCamera : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0f, currentYaw, 0f);
     }
 
-    private void OnMouseMoved(Vector2 currentDelta)
-    {
-        m_mouseXDelta =  currentDelta.x;
-    }
+
 }

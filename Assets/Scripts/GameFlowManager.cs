@@ -48,8 +48,8 @@ namespace Prototypes.Alex
             {
                 ScreenFader.ForceSetColorBlack();
 
-                waitCamera.enabled = true;
-                playerCamera.enabled = false;
+                waitCamera.gameObject.SetActive(true);
+                playerCamera.gameObject.SetActive(false);
                 
                 dockManager.SetupDocks(dayDefinition.dockRequirements);
                 bulletinManager.Setup(dayDefinition.dockRequirements, dayDefinition.rules);
@@ -60,8 +60,8 @@ namespace Prototypes.Alex
 
                 ScreenFader.FadeInOut(0.5f, () =>
                 {
-                    waitCamera.enabled = false;
-                    playerCamera.enabled = true;
+                    waitCamera.gameObject.SetActive(false);
+                    playerCamera.gameObject.SetActive(true);
                 }, null);
 
                 var spawnShipsCoroutine = StartCoroutine(SpawnShips(dayDefinition));

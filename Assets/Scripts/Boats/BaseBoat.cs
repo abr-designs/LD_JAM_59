@@ -87,6 +87,7 @@ namespace Prototypes.Alex.Boats
             {
                 var flagRenderer = flagRenderers[i];
                 flagRenderer.sharedMaterials[1] = mat;
+                flagRenderer.sharedMaterials[1].mainTexture = shipType.GetTexture();
             }
 
             m_moveTarget = s_dockManager.portEntranceTransform;

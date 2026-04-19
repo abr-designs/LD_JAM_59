@@ -397,9 +397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SnapSideCamera
   leftYaw: -70.26
   rightYaw: 6.7
-  inputThreshold: 0.2
-  switchPoint: 0
-  switchDeadZone: 10
+  switchThreshold: 0.6
+  inputBuildSpeed: 3
+  inputDecaySpeed: 2
   smoothTime: 0.15
   maxSpeed: 1000
 --- !u!1001 &179309016
