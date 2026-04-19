@@ -50,6 +50,10 @@ MonoBehaviour:
   musicDatas:
   - name: MENU
     type: 1
-    audioClip: {fileID: 8300000, guid: 71327417229ae57459f5dd301f1f6567, type: 3}
-    targetVolume: 1
+    audioClip: {fileID: 8300000, guid: 59e88014204ccdd44b418c2fb50ff670, type: 3}
+    targetVolume: 0.7
+  - name: MENU
+    type: 2
+    audioClip: {fileID: 8300000, guid: df63436557abecf4c9649a5746de4d09, type: 3}
+    targetVolume: 0.5
   musicSourcePrefab: {fileID: 2744353851148896356, guid: b4fd897668d6ac841ad6e796534532c8, type: 3}
