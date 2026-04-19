@@ -10,6 +10,6 @@ EditorBuildSettings:
     guid: b7d6230276c53b84d84ca33e843b75ba
   - enabled: 1
     path: Assets/_Scenes/Ship_Scene.unity
-    guid: 02b69eaca5e4e494fa246fccef451809
+    guid: 1291cc5e53f6eaa4b921a6a0ddc86be3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
