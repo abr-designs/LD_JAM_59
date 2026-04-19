@@ -61,8 +61,10 @@ MonoBehaviour:
   spacing: 0.25
   moveSpeed: 0
   targetXOffset: 9
+  targetZRotation: 360
   ropeTargetRenderer: {fileID: 513866025271512600}
   textureName: _MainTex
+  pulley: {fileID: 8895609767971739348}
   audioSource: {fileID: 7949373680201328091}
 --- !u!65 &723127275486928730
 BoxCollider:
@@ -789,5 +791,10 @@ PrefabInstance:
 --- !u!4 &8086315795203951726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 412fc0dad2418ab4b9cdd7058e7ef074, type: 3}
+  m_PrefabInstance: {fileID: 8625207071525989253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8895609767971739348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 412fc0dad2418ab4b9cdd7058e7ef074, type: 3}
   m_PrefabInstance: {fileID: 8625207071525989253}
   m_PrefabAsset: {fileID: 0}
