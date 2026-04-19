@@ -10,14 +10,16 @@ namespace Prototypes.Alex
         private static PlayerFlagInventory s_playerFlagInventory;
         // public float duration = 5.0f;
         public float targetXOffset = 1.0f;
+        public float targetZRotation = 360.0f;
         public LineRenderer ropeTargetRenderer;
         public string textureName = "_MainTex";
+        public GameObject pulley;
         private Material mat;
-        
+
         [SerializeField]
         private AudioSource audioSource;
         private Coroutine audioCoroutine;
-        
+
         protected override void Start()
         {
             base.Start();
@@ -33,26 +35,29 @@ namespace Prototypes.Alex
             HoistFlags(s_playerFlagInventory.holdingFlags);
             StartCoroutine(RopePuller());
             s_playerFlagInventory.DropAllFlags();
-            
-            if(audioCoroutine != null)
+
+            if (audioCoroutine != null)
                 StopCoroutine(audioCoroutine);
-            
+
             audioCoroutine = StartCoroutine(PlayAudio((CurrentFlags.Count > 0), 0.75f));
         }
 
         IEnumerator RopePuller()
         {
             float elapsed = 0f;
-
+            Vector3 startRotation = pulley.transform.eulerAngles;
             Vector2 startOffset = mat.GetTextureOffset(textureName);
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 float newX = Mathf.Lerp(startOffset.x, targetXOffset, elapsed / duration);
+                float rotZ = Mathf.Lerp(startRotation.z, targetZRotation, elapsed / duration);
+                Debug.Log(rotZ);
                 mat.SetTextureOffset(textureName, new Vector2(newX, startOffset.y));
+                pulley.transform.eulerAngles = new Vector3(startRotation.x, startRotation.y, rotZ);
                 yield return null; // Wait for next frame
             }
-
+            pulley.transform.eulerAngles = new Vector3(startRotation.x, startRotation.y, startRotation.z);
             mat.SetTextureOffset(textureName, new Vector2(0.0f, startOffset.y));
         }
 
@@ -60,21 +65,21 @@ namespace Prototypes.Alex
         {
             var startVolume = state ? 0f : 1f;
             var endVolume = state ? 1f : 0f;
-            
-            if(state)
+
+            if (state)
                 audioSource.Play();
-            
+
             audioSource.volume = startVolume;
             for (float t = 0; t < time; t += Time.deltaTime)
             {
                 audioSource.volume = Mathf.Lerp(startVolume, endVolume, t / time);
-                
+
                 yield return null;
             }
-            
+
             audioSource.volume = endVolume;
-            
-            if(!state)
+
+            if (!state)
                 audioSource.Pause();
         }
     }
