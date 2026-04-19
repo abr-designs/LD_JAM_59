@@ -7,6 +7,7 @@ namespace Prototypes.Alex
 {
     public class FlagPickup : MonoBehaviour, IInteractable
     {
+        private static FPSHandsController s_fpsHandsController;
         private static PlayerFlagInventory s_playerFlagInventory;
 
         [SerializeField, ReadOnly]
@@ -18,6 +19,9 @@ namespace Prototypes.Alex
         {
             if(s_playerFlagInventory == null)
                 s_playerFlagInventory  = FindAnyObjectByType<PlayerFlagInventory>();
+            
+            if(s_fpsHandsController == null)
+                s_fpsHandsController  = FindAnyObjectByType<FPSHandsController>();
         }
 
         public void Setup(FlagDefinition flagDefinition)
@@ -28,6 +32,7 @@ namespace Prototypes.Alex
         public void OnInteract()
         {
             s_playerFlagInventory.HoldFlag(flagType);
+            s_fpsHandsController.SetState(FPSHandsController.HandState.Grabbing);
         }
     }
 }

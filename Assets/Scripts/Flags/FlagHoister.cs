@@ -30,13 +30,17 @@ public class FlagHoister : MonoBehaviour
         if (s_gameFlowManager == null)
             s_gameFlowManager = FindAnyObjectByType<GameFlowManager>();
 
-        m_activeFlagRenderers = new List<GameObject>();
+        if(m_activeFlagRenderers == null)
+            m_activeFlagRenderers = new List<GameObject>();
 
 
     }
 
     public void HoistFlags(List<FLAG> flags)
     {
+        if(m_activeFlagRenderers == null)
+            m_activeFlagRenderers = new List<GameObject>();
+        
         if (m_activeFlagRenderers.Count > 0)
         {
             StartCoroutine(RemoveFlagsCoroutine());
@@ -51,6 +55,9 @@ public class FlagHoister : MonoBehaviour
 
     public void RemoveFlags()
     {
+        if (m_activeFlagRenderers == null)
+            return;
+        
         if (m_activeFlagRenderers.Count == 0)
             return;
 
@@ -73,6 +80,8 @@ public class FlagHoister : MonoBehaviour
                 transform.TransformPoint(startPos),
                 transform.rotation,
                 transform);
+
+            flagGameObject.name = $"{flag}_{flagPrefab.name}_instance";
             
             flagGameObject.transform.localRotation = Quaternion.identity;
             flagGameObject.transform.localScale = Vector3.one * flagSize;

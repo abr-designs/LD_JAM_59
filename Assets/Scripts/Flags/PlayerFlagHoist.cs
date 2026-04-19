@@ -7,6 +7,7 @@ namespace Prototypes.Alex
 {
     public class PlayerFlagHoist : FlagHoister, IInteractable
     {
+        private static FPSHandsController s_fpsHandsController;
         private static PlayerFlagInventory s_playerFlagInventory;
         // public float duration = 5.0f;
         public float targetXOffset = 1.0f;
@@ -17,13 +18,16 @@ namespace Prototypes.Alex
         [SerializeField]
         private AudioSource audioSource;
         private Coroutine audioCoroutine;
-        
+
         protected override void Start()
         {
             base.Start();
 
             if (s_playerFlagInventory == null)
                 s_playerFlagInventory = FindAnyObjectByType<PlayerFlagInventory>();
+            
+            if(s_fpsHandsController == null)
+                s_fpsHandsController  = FindAnyObjectByType<FPSHandsController>();
 
             mat = ropeTargetRenderer.sharedMaterial;
         }
@@ -33,6 +37,8 @@ namespace Prototypes.Alex
             HoistFlags(s_playerFlagInventory.holdingFlags);
             StartCoroutine(RopePuller());
             s_playerFlagInventory.DropAllFlags();
+            
+            s_fpsHandsController.SetState(FPSHandsController.HandState.Dropping);
             
             if(audioCoroutine != null)
                 StopCoroutine(audioCoroutine);

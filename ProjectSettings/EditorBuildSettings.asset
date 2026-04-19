@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/Jam Starter Kit/0.0.9/Main Menu UI/MainMenu.unity
     guid: b7d6230276c53b84d84ca33e843b75ba
   - enabled: 1

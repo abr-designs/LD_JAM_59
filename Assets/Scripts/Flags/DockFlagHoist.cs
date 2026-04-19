@@ -12,9 +12,12 @@ namespace Flags
         {
             if (m_flags == null)
                 m_flags = new List<FLAG>();
-        
-            RemoveFlags();
-            m_flags.Clear();
+
+            if (m_flags.Count > 0)
+            {
+                RemoveFlags();
+                m_flags.Clear();
+            }
         
             var flagCount = dockRequirementData.cargoCount;
             var flagType = dockRequirementData.cargoType;
