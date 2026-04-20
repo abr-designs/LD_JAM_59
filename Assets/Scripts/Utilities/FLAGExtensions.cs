@@ -27,5 +27,20 @@ namespace Prototypes.Alex.Utilities
         {
             return flagType.GetFlagDefinition().texture;
         }
+
+        public static bool IsDock(this FLAG flagType)
+        {
+            return flagType is FLAG.MOVE_TO_A or FLAG.MOVE_TO_B or FLAG.MOVE_TO_C;
+        }
+        
+        public static bool IsShip(this FLAG flagType)
+        {
+            return flagType is FLAG.SHIP_YELLOW or FLAG.SHIP_BLUE or FLAG.SHIP_GREEN;
+        }
+        
+        public static bool IsCargo(this FLAG flagType)
+        {
+            return flagType is FLAG.CARGO_GOODS or FLAG.CARGO_PASSENGER;
+        }
     }
 }

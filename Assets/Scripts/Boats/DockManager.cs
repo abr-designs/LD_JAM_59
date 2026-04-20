@@ -4,6 +4,7 @@ using System.Linq;
 using Flags;
 using NaughtyAttributes;
 using Prototypes.Alex.Days;
+using Prototypes.Alex.Utilities;
 using UnityEngine;
 using UnityUtils;
 
@@ -33,18 +34,29 @@ namespace Prototypes.Alex.Boats
         
         [SerializeField]
         private List<DockData> docks = new();
-
         
         public Transform portEntranceTransform;
 
         //Ship Behaviours
         //================================================================================================================//
 
-        public bool AreDocksFull() =>  docks.All(d => d.IsFull);
-        
-        public bool RequestToDock(FLAG dock, BaseBoat boat)
+        public bool AreDocksFull()
         {
-            var dockData = docks.First(d => d.dock == dock);
+            var boatCount = docks.Sum(d => d.boats?.Count);
+            var expectedBoatCount = docks.Sum(d => d.maxCapacity);
+            
+            return boatCount >= expectedBoatCount;
+        }
+        
+        public bool RequestToDock(FLAG dockFlag, BaseBoat boat)
+        {
+            if(!dockFlag.IsDock())
+                throw new ArgumentException("Cannot dock with non-dock flag: " + dockFlag);
+            
+            var dockData = docks.FirstOrDefault(d => d.dock == dockFlag);
+
+            if (dockData == null)
+                throw new ArgumentNullException(nameof(dockFlag), "Cannot find dock with flag: " + dockFlag);
 
             if (dockData.IsFull)
                 return false;
@@ -59,7 +71,7 @@ namespace Prototypes.Alex.Boats
 
         public FLAG GetRandomDockAvailableDock()
         {
-            var freeSpots =  docks.Where(d => d.IsFull);
+            var freeSpots =  docks.Where(d => !d.IsFull);
             return freeSpots.Random().dock;
         }
         public Transform GetDockTransform(FLAG dock)

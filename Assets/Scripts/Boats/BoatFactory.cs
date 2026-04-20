@@ -36,6 +36,9 @@ namespace Prototypes.Alex.Boats
             var position = spawnPoint.worldPosition + new Vector3(randomPosition.x, 0, randomPosition.y);
             
             var baseBoat = Object.Instantiate(boatPrefab, position, Quaternion.identity);
+            
+            baseBoat.gameObject.name = $"{shipType}_{cargoType}_{nameof(BaseBoat)}_instance";
+            
             baseBoat.Init(shipType, cargoType);
             
             return baseBoat;
