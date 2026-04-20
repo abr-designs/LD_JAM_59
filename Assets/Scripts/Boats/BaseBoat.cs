@@ -99,6 +99,8 @@ namespace Prototypes.Alex.Boats
 
         private void OnDestroy()
         {
+            AllBoats.Remove(this);
+            
             if(AllBoats.Count == 0)
                 OnNoMoreBoats?.Invoke();
         }
@@ -161,8 +163,18 @@ namespace Prototypes.Alex.Boats
                 case STATE.RESPONDING:
                     break;
                 case STATE.LEAVING_PORT:
+                {
                     MoveTowards(m_startPosition);
+                    var planar = Vector3.ProjectOnPlane(transform.position - m_startPosition, Vector3.up);
+                    var distance = planar.magnitude;
+                    if (distance < 10f)
+                    {
+                        SetState(STATE.NONE);
+                        Destroy(gameObject);
+                    }
+
                     break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException();
             }

@@ -58,7 +58,7 @@ namespace Prototypes.Alex
                 elapsed += Time.deltaTime;
                 float newX = Mathf.Lerp(startOffset.x, targetXOffset, elapsed / duration);
                 float rotZ = Mathf.Lerp(startRotation.z, targetZRotation, elapsed / duration);
-                Debug.Log(rotZ);
+                //Debug.Log(rotZ);
                 mat.SetTextureOffset(textureName, new Vector2(newX, startOffset.y));
                 pulley.transform.eulerAngles = new Vector3(startRotation.x, startRotation.y, rotZ);
                 yield return null; // Wait for next frame
