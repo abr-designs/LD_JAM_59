@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Water:
-        m_Texture: {fileID: 2800000, guid: 8ec1bc8802c7e96439d0f512c38c1748, type: 3}
+        m_Texture: {fileID: 2800000, guid: e0c0c043216622849a40d302580d142b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -124,7 +124,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale: 0.005
+    - _Scale: 0.05
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -141,9 +141,12 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Deep: {r: 0, g: 0, b: 0, a: 1}
+    - _DeepColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HighlightColor: {r: 0.7254902, g: 0.8313726, b: 0.7058824, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Shallow: {r: 1, g: 1, b: 1, a: 1}
+    - _ShallowColor: {r: 0.4156863, g: 0.68235296, b: 0.6156863, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Wave1Dir: {r: 1, g: 0, b: 0, a: 0}
     - _Wave2Dir_1: {r: 1, g: 1, b: 0, a: 0}
