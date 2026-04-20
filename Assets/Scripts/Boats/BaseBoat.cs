@@ -12,10 +12,19 @@ namespace Prototypes.Alex.Boats
     [RequireComponent(typeof(BoatFlagHoist))]
     public class BaseBoat : MonoBehaviour
     {
-        public static List<BaseBoat> AllBoats = new List<BaseBoat>();
+        enum STATE
+        {
+            NONE,
+            AWAITING_PLAYER_FLAGS,
+            RESPONDING,
+            MOVING_TO_PORT,
+            MOVING_TO_DOCK,
+            LEAVING_PORT
+        }
+        
+        public static readonly List<BaseBoat> AllBoats = new List<BaseBoat>();
         //public static event Action<BaseBoat> OnDocked;
         public static event Action OnNoMoreBoats;
-        private static int s_boatCount;
         
         public FLAG CargoType => cargoType;
         public FLAG ShipType => shipType;
@@ -37,16 +46,6 @@ namespace Prototypes.Alex.Boats
         private FLAG dockTarget;
 
         //================================================================================================================//
-
-        enum STATE
-        {
-            NONE,
-            AWAITING_PLAYER_FLAGS,
-            RESPONDING,
-            MOVING_TO_PORT,
-            MOVING_TO_DOCK,
-            LEAVING_PORT
-        }
         
         [SerializeField]
         private float boatMoveSpeed;
@@ -77,7 +76,6 @@ namespace Prototypes.Alex.Boats
             if(s_dockManager == null)
                 s_dockManager = FindAnyObjectByType<DockManager>();
             
-            s_boatCount++;
             this.shipType = shipType;
             this.cargoType = cargoType;
             isDocked = false;
@@ -101,9 +99,7 @@ namespace Prototypes.Alex.Boats
 
         private void OnDestroy()
         {
-            s_boatCount--;
-            
-            if(s_boatCount == 0)
+            if(AllBoats.Count == 0)
                 OnNoMoreBoats?.Invoke();
         }
         //================================================================================================================//
@@ -111,8 +107,7 @@ namespace Prototypes.Alex.Boats
         private void Start()
         {
             m_startPosition = transform.position;
-
-
+            AllBoats.Add(this);
 
             SetState(startingState);
         }
@@ -273,7 +268,7 @@ namespace Prototypes.Alex.Boats
 
         public static void CleanBoats()
         {
-            for (int i = AllBoats.Count; i >= 0 ; i++)
+            for (int i = AllBoats.Count - 1; i >= 0 ; i--)
             {
                 Destroy(AllBoats[i].gameObject);
             }

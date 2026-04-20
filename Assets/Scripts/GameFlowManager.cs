@@ -17,6 +17,12 @@ namespace Prototypes.Alex
         [SerializeField]
         private BulletinManager bulletinManager;
         
+        [SerializeField, Min(0f), Header("Times")]
+        private float boardReviewTime = 10f;
+
+        [SerializeField, Min(0f)]
+        private float fadeTime = 0.5f;
+        
         [SerializeField, Header("Days")]
         private List<DayDefinition> dayDefinitions;
         
@@ -29,7 +35,17 @@ namespace Prototypes.Alex
         [SerializeField]
         private Camera playerCamera;
 
-        
+#if UNITY_EDITOR
+        [SerializeField, Header("Debugging")]
+        private bool debug;
+
+        [SerializeField]
+        private float boatSpawnTimeOverride;
+        [SerializeField]
+        private float startDelayOverride;
+#endif
+
+       
 
         private void Start()
         {
@@ -54,17 +70,23 @@ namespace Prototypes.Alex
                 dockManager.SetupDocks(dayDefinition.dockRequirements);
                 bulletinManager.Setup(dayDefinition.dockRequirements, dayDefinition.rules);
                 
-                yield return ScreenFader.FadeIn(0.5f, null);
+                yield return ScreenFader.FadeIn(fadeTime, null);
 
-                yield return new WaitForSeconds(Random.Range(10f, 15f));
+                yield return new WaitForSeconds(boardReviewTime);
 
-                ScreenFader.FadeInOut(0.5f, () =>
+                ScreenFader.FadeInOut(fadeTime, () =>
                 {
                     waitCamera.gameObject.SetActive(false);
                     playerCamera.gameObject.SetActive(true);
                 }, null);
 
+#if UNITY_EDITOR
+                var wait = dayDefinition.startDelay;
+                yield return new WaitForSeconds(debug ? startDelayOverride : wait);
+#else
                 yield return new WaitForSeconds(dayDefinition.startDelay);
+                
+#endif
 
                 var spawnShipsCoroutine = StartCoroutine(SpawnShips(dayDefinition));
 
@@ -76,7 +98,7 @@ namespace Prototypes.Alex
 
                 StopCoroutine(spawnShipsCoroutine);
                 BaseBoat.CleanBoats();
-                yield return ScreenFader.FadeOut(0.5f, null);
+                yield return ScreenFader.FadeOut(fadeTime, null);
                 
                 continue;
 
@@ -90,14 +112,20 @@ namespace Prototypes.Alex
             //TODO Move to the win screen
         }
 
-        private static IEnumerator SpawnShips(DayDefinition dayDefinition)
+        private IEnumerator SpawnShips(DayDefinition dayDefinition)
         {
             for (int i = 0; i < dayDefinition.shipSpawnCount; i++)
             {
                 dayDefinition.SpawnRandomShip();
-                
+
+#if UNITY_EDITOR
                 var wait = Random.Range(dayDefinition.shipSpawnIntervalMin, dayDefinition.shipSpawnIntervalMax);
+                yield return new WaitForSeconds(debug ? boatSpawnTimeOverride : wait);
+#else
+                var wait = Random.Range(dayDefinition.shipSpawnIntervalMin, dayDefinition.shipSpawnIntervalMax);
+                
                 yield return new WaitForSeconds(wait);
+#endif
             }
         }
         
@@ -106,7 +134,10 @@ namespace Prototypes.Alex
 
         public FlagDefinition GetFlagDefinition(FLAG flag)
         {
-            return m_flags[flag];
+            if(m_flags.TryGetValue(flag, out var flagDefinition))
+                return flagDefinition;
+
+            throw new MissingMemberException($"No flag definition found for {flag}");
         }
     }
 }
