@@ -85,14 +85,14 @@ public class FlagHoister : MonoBehaviour
             
             flagGameObject.transform.localRotation = Quaternion.identity;
             flagGameObject.transform.localScale = Vector3.one * flagSize;
-            flagGameObject.GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = flag.GetTexture();
+            
+            var flagMaterial = SharedMaterialManager.GetFlagMaterial(flag);
+            flagGameObject.GetComponentInChildren<SkinnedMeshRenderer>().SetSharedMaterial(0, flagMaterial);
 
             m_activeFlagRenderers.Add(flagGameObject);
         }
 
         float elapsed = 0f;
-
-
         while (elapsed < duration)
         {
 
