@@ -79,14 +79,11 @@ namespace Prototypes.Alex.Boats
             this.shipType = shipType;
             this.cargoType = cargoType;
             isDocked = false;
-
-            var mat = flagRenderers[0].materials[1];
-            mat.mainTexture = shipType.GetTexture();
-            for (var i = 1; i < flagRenderers.Length; i++)
+            
+            var material = SharedMaterialManager.GetSailMaterial(shipType);
+            for (var i = 0; i < flagRenderers.Length; i++)
             {
-                var flagRenderer = flagRenderers[i];
-                flagRenderer.sharedMaterials[1] = mat;
-                flagRenderer.sharedMaterials[1].mainTexture = shipType.GetTexture();
+               flagRenderers[i].SetSharedMaterial(1, material);
             }
 
             m_moveTarget = s_dockManager.portEntranceTransform;
