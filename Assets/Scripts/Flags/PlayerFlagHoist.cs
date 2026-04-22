@@ -45,6 +45,9 @@ namespace Prototypes.Alex
             if (audioCoroutine != null)
                 StopCoroutine(audioCoroutine);
 
+            if (CurrentFlags == null || CurrentFlags.Count == 0)
+                return;
+            
             audioCoroutine = StartCoroutine(PlayAudio((CurrentFlags.Count > 0), 0.75f));
         }
 
