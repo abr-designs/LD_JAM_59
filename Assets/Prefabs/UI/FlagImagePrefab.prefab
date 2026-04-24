@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5401036831977631234}
   - component: {fileID: 4453306742441829436}
   - component: {fileID: 5996536719912447482}
+  - component: {fileID: -5530859641302056562}
   m_Layer: 5
   m_Name: FlagImagePrefab
   m_TagString: Untagged
@@ -75,3 +76,119 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-5530859641302056562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268622924577985172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d555c45d9ecce4aae1b7c45ee2c3c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Jam-starter.Runtime::Utilities.Animations.TransformAnimator
+  animationTimeRange: {x: 0.05, y: 0.1}
+  scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.99572825
+      inSlope: 1.6983641
+      outSlope: 1.6983641
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.10912211
+      value: 1.1810573
+      inSlope: 0.4128825
+      outSlope: 0.4128825
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.50164783
+      value: 0.8385397
+      inSlope: -0.026132286
+      outSlope: -0.026132286
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8102074
+      value: 1.0916618
+      inSlope: 0.15743464
+      outSlope: 0.15743464
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.99572825
+      inSlope: -0.006245866
+      outSlope: -0.006245866
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationOffset: 45
+  rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 1.6071436
+      outSlope: 1.6071436
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.26666656
+      value: 1.4285715
+      inSlope: -2.2245507
+      outSlope: -2.2245507
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4176329
+      value: 0.5142822
+      inSlope: -2.0848546
+      outSlope: -2.0848546
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7647057
+      value: 1.1690476
+      inSlope: 0.5840421
+      outSlope: 0.5840421
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.7184518
+      outSlope: -0.7184518
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

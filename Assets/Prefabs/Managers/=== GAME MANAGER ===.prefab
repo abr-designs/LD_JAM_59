@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Prototypes.Alex.GameFlowManager
   dockManager: {fileID: 2816709032197301035}
   bulletinManager: {fileID: 4149692439369661292}
-  boardReviewTime: 10
+  boardReviewTime: 7
   fadeTime: 0.5
   dayDefinitions:
   - {fileID: 11400000, guid: f26f1b50ac7eead468e0a93665144fb9, type: 2}
@@ -76,6 +76,7 @@ MonoBehaviour:
   waitCamera: {fileID: 0}
   playerCamera: {fileID: 0}
   debug: 0
+  boardReviewTimeOverride: 0
   boatSpawnTimeOverride: 0
   startDelayOverride: 0
 --- !u!1001 &266297059267958827
