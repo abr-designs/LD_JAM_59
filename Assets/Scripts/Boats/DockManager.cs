@@ -7,6 +7,8 @@ using Prototypes.Alex.Days;
 using Prototypes.Alex.Utilities;
 using UnityEngine;
 using UnityUtils;
+using Utilities;
+using Utilities.Animations;
 
 namespace Prototypes.Alex.Boats
 {
@@ -18,7 +20,7 @@ namespace Prototypes.Alex.Boats
             public bool IsFull => maxCapacity == 0 || boats.Count >= maxCapacity;
             
             public FLAG dock;
-            public Transform dockTransform;
+            public SimplePath dockPath;
             public DockFlagHoist dockFlagHoist;
             
             [Space(10f)]
@@ -74,9 +76,9 @@ namespace Prototypes.Alex.Boats
             var freeSpots =  docks.Where(d => !d.IsFull);
             return freeSpots.Random().dock;
         }
-        public Transform GetDockTransform(FLAG dock)
+        public SimplePath GetDockPath(FLAG dock)
         {
-            return docks.First(d => d.dock == dock).dockTransform;
+            return docks.First(d => d.dock == dock).dockPath;
         }
 
         //Day Behaviours
