@@ -10,6 +10,8 @@ public class FlagHoister : MonoBehaviour
     public event Action<IReadOnlyList<FLAG>> OnFlagsChanged;
     public IReadOnlyList<FLAG> CurrentFlags { get; private set; }
 
+    [Header("Flag Hoist Settings")]
+    [Tooltip("0 = unlimited")]
     public int maxFlags;
     public GameObject flagPrefab;
     public float duration = 5.0f;
@@ -32,12 +34,16 @@ public class FlagHoister : MonoBehaviour
 
         if(m_activeFlagRenderers == null)
             m_activeFlagRenderers = new List<GameObject>();
-
-
     }
 
     public void HoistFlags(List<FLAG> flags)
     {
+        if (flags == null)
+            return;
+
+        if (maxFlags > 0 && flags.Count > maxFlags)
+            return;
+        
         if(m_activeFlagRenderers == null)
             m_activeFlagRenderers = new List<GameObject>();
         

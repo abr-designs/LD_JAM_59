@@ -1,25 +1,35 @@
-﻿using Prototypes.Alex.Interactables;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using Prototypes.Alex.Interactables;
 using UnityEngine;
 
 namespace Prototypes.Alex
 {
     public class PlayerFlagHoist : FlagHoister, IInteractable
     {
+        private static readonly int TexturePropertyId = Shader.PropertyToID(k_TextureName);
+        private const string k_TextureName = "_MainTex";
+        
         private static FPSHandsController s_fpsHandsController;
         private static PlayerFlagInventory s_playerFlagInventory;
-        // public float duration = 5.0f;
-        public float targetXOffset = 1.0f;
-        public float targetZRotation = 360.0f;
-        public LineRenderer ropeTargetRenderer;
-        public string textureName = "_MainTex";
-        public GameObject pulley;
-        private Material mat;
+
+        [SerializeField, Header("Player Flag Hoist")]
+        private AudioSource audioSource;
+        private Coroutine m_audioCoroutine;
+        
+        [Header("Ropes")]
+        [SerializeField]
+        private LineRenderer ropeTargetRenderer;
+        
+        [SerializeField]
+        private Transform handWheelTransform;
+        [SerializeField]
+        private float ropeTextureTargetXOffset = 1.0f;
+        private Material m_ropeMaterial;
+        
+        [Header("Pulley")]
 
         [SerializeField]
-        private AudioSource audioSource;
-        private Coroutine audioCoroutine;
+        private float targetZRotation = 360.0f;
 
         protected override void Start()
         {
@@ -31,7 +41,7 @@ namespace Prototypes.Alex
             if (s_fpsHandsController == null)
                 s_fpsHandsController = FindAnyObjectByType<FPSHandsController>();
 
-            mat = ropeTargetRenderer.sharedMaterial;
+            m_ropeMaterial = ropeTargetRenderer.sharedMaterial;
         }
         public void OnInteract()
         {
@@ -42,32 +52,33 @@ namespace Prototypes.Alex
 
             s_fpsHandsController.SetState(FPSHandsController.HandState.Dropping);
 
-            if (audioCoroutine != null)
-                StopCoroutine(audioCoroutine);
+            if (m_audioCoroutine != null)
+                StopCoroutine(m_audioCoroutine);
 
             if (CurrentFlags == null || CurrentFlags.Count == 0)
                 return;
             
-            audioCoroutine = StartCoroutine(PlayAudio((CurrentFlags.Count > 0), 0.75f));
+            m_audioCoroutine = StartCoroutine(PlayAudio((CurrentFlags.Count > 0), 0.75f));
         }
 
-        IEnumerator RopePuller()
+        private IEnumerator RopePuller()
         {
-            float elapsed = 0f;
-            Vector3 startRotation = pulley.transform.eulerAngles;
-            Vector2 startOffset = mat.GetTextureOffset(textureName);
-            while (elapsed < duration)
+            var startRotation = handWheelTransform.localEulerAngles;
+            Vector2 startOffset = m_ropeMaterial.GetTextureOffset(TexturePropertyId);
+
+            for (float t = 0f; t < duration; t += Time.deltaTime)
             {
-                elapsed += Time.deltaTime;
-                float newX = Mathf.Lerp(startOffset.x, targetXOffset, elapsed / duration);
-                float rotZ = Mathf.Lerp(startRotation.z, targetZRotation, elapsed / duration);
-                //Debug.Log(rotZ);
-                mat.SetTextureOffset(textureName, new Vector2(newX, startOffset.y));
-                pulley.transform.eulerAngles = new Vector3(startRotation.x, startRotation.y, rotZ);
+                var dt = t / duration;
+                
+                float newX = Mathf.Lerp(startOffset.x, ropeTextureTargetXOffset, dt);
+                float rotZ = Mathf.Lerp(startRotation.z, targetZRotation, dt);
+                m_ropeMaterial.SetTextureOffset(TexturePropertyId, new Vector2(newX, startOffset.y));
+                handWheelTransform.localEulerAngles = new Vector3(startRotation.x, startRotation.y, rotZ);
                 yield return null; // Wait for next frame
             }
-            pulley.transform.eulerAngles = new Vector3(startRotation.x, startRotation.y, startRotation.z);
-            mat.SetTextureOffset(textureName, new Vector2(0.0f, startOffset.y));
+
+            handWheelTransform.localEulerAngles = startRotation;
+            m_ropeMaterial.SetTextureOffset(TexturePropertyId, new Vector2(0.0f, startOffset.y));
         }
 
         private IEnumerator PlayAudio(bool state, float time)

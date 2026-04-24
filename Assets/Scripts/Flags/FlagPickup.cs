@@ -37,6 +37,9 @@ namespace Prototypes.Alex
         {
             s_playerFlagInventory.HoldFlag(flagType);
             s_fpsHandsController.SetState(FPSHandsController.HandState.Grabbing);
+
+            if (s_playerFlagInventory.IsFull)
+                return;
             
             if(transformAnimator != null)
                 transformAnimator.Play();
