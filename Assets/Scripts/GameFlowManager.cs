@@ -40,6 +40,8 @@ namespace Prototypes.Alex
         private bool debug;
 
         [SerializeField]
+        private float boardReviewTimeOverride;
+        [SerializeField]
         private float boatSpawnTimeOverride;
         [SerializeField]
         private float startDelayOverride;
@@ -72,7 +74,11 @@ namespace Prototypes.Alex
                 
                 yield return ScreenFader.FadeIn(fadeTime, null);
 
+#if UNITY_EDITOR
+                yield return new WaitForSeconds(debug ? boardReviewTimeOverride : boardReviewTime);
+#else
                 yield return new WaitForSeconds(boardReviewTime);
+#endif
 
                 ScreenFader.FadeInOut(fadeTime, () =>
                 {

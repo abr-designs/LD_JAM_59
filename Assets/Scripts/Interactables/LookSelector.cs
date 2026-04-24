@@ -33,7 +33,6 @@ namespace Prototypes.Alex.Interactables
 
             if (!Physics.Raycast(ray, out var hit, interactDistance, interactLayer)) 
                 return;
-            Debug.Log("Hit: " + hit.collider.name);
 
             var interactable = hit.collider.GetComponent<IInteractable>();
             if (interactable != null)
