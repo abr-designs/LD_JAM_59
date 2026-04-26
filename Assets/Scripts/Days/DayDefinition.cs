@@ -17,16 +17,25 @@ namespace Prototypes.Alex.Days
         public List<RuleData> rules;
         public List<DockRequirementData> dockRequirements;
 
-        public void SpawnRandomShip()
+        public bool SpawnRandomShip()
         {
+            const int MAX_ATTEMPTS = 100;
+            
             var shipData = GetRandomShipSpawnData();
-
+            int attempts = 0;
             while (BaseBoat.HasActiveBoat(shipData.ShipType, shipData.CargoType))
             {
+                if (++attempts >= MAX_ATTEMPTS)
+                {
+                    Debug.LogError("SpawnRandomShip: Failed to find a unique ship after 100 attempts...");
+                    return false;
+                }
+
                 shipData = GetRandomShipSpawnData();
             }
-            
+
             BoatFactory.SpawnBoat(shipData);
+            return true;
         }
 
         private ShipSpawnData GetRandomShipSpawnData()

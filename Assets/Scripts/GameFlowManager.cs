@@ -122,7 +122,9 @@ namespace Prototypes.Alex
         {
             for (int i = 0; i < dayDefinition.shipSpawnCount; i++)
             {
-                dayDefinition.SpawnRandomShip();
+                //If something failed (Too many attempts), wait & try again
+                if (!dayDefinition.SpawnRandomShip())
+                    i -= 1;
 
 #if UNITY_EDITOR
                 var wait = Random.Range(dayDefinition.shipSpawnIntervalMin, dayDefinition.shipSpawnIntervalMax);
