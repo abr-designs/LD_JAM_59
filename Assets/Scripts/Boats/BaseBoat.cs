@@ -5,11 +5,11 @@ using Audio.SoundFX;
 using NaughtyAttributes;
 using Prototypes.Alex.Utilities;
 using UnityEngine;
+using Utilities;
 using Utilities.Debugging;
 
 namespace Prototypes.Alex.Boats
 {
-    [RequireComponent(typeof(BoatFlagHoist))]
     public class BaseBoat : MonoBehaviour
     {
         enum STATE
@@ -18,6 +18,7 @@ namespace Prototypes.Alex.Boats
             AWAITING_PLAYER_FLAGS,
             RESPONDING,
             MOVING_TO_PORT,
+            PREPARING_TO_DOCK,
             MOVING_TO_DOCK,
             LEAVING_PORT
         }
@@ -29,6 +30,9 @@ namespace Prototypes.Alex.Boats
         public FLAG CargoType => cargoType;
         public FLAG ShipType => shipType;
         public bool IsDocked => isDocked;
+
+        [SerializeField]
+        private SmoothMoveAndFace smoothMoveAndFace;
         
         [SerializeField]
         private Renderer[] flagRenderers;
@@ -43,7 +47,10 @@ namespace Prototypes.Alex.Boats
         private static DockManager s_dockManager;
         
         private Transform m_moveTarget;
-        private FLAG dockTarget;
+        
+        private FLAG m_dockTarget;
+        private SimplePath m_dockPath;
+        private float m_dockingProgress;
 
         //================================================================================================================//
         
@@ -106,6 +113,8 @@ namespace Prototypes.Alex.Boats
         private void Start()
         {
             m_startPosition = transform.position;
+            m_targetWorldPosition = m_startPosition;
+            m_targetLookDirection = transform.forward;
             AllBoats.Add(this);
 
             SetState(startingState);
@@ -141,15 +150,31 @@ namespace Prototypes.Alex.Boats
 
                     break;
                 }
-                case STATE.MOVING_TO_DOCK:
+                case STATE.PREPARING_TO_DOCK:
                 {
                     MoveTowards(m_moveTarget.position);
                     var planar = Vector3.ProjectOnPlane(transform.position - m_moveTarget.position, Vector3.up);
                     var distance = planar.magnitude;
-                    if (distance < 10f)
+                    if (distance < 2f)
                     {
-                        if (s_dockManager.RequestToDock(dockTarget, this))
+                        SetState(STATE.MOVING_TO_DOCK);
+                    }
+                    break;
+                }
+                case STATE.MOVING_TO_DOCK:
+                {
+                    m_dockingProgress += boatMoveSpeed * Time.deltaTime;
+                    
+                    var newPosition = m_dockPath.GetPosition(m_dockingProgress, boatMoveSpeed, out var forwardDirection, out var totalT);
+
+                    m_targetWorldPosition = newPosition;
+                    m_targetLookDirection = forwardDirection;
+                    
+                    if (Mathf.Approximately(totalT, 1f))
+                    {
+                        if (s_dockManager.RequestToDock(m_dockTarget, this))
                             isDocked = true;
+                        
                         SetState(STATE.NONE);
                     }
 
@@ -175,18 +200,23 @@ namespace Prototypes.Alex.Boats
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            smoothMoveAndFace.SetTarget(m_targetWorldPosition, m_targetLookDirection.normalized);
 
             return;
             void MoveTowards(Vector3 target)
             {
-                var pos = Vector3.MoveTowards(transform.position, target, Time.deltaTime * boatMoveSpeed);
-                var dir = (pos - transform.position).normalized;
+                var pos = Vector3.MoveTowards(m_targetWorldPosition, target, Time.deltaTime * boatMoveSpeed);
+                var dir = (pos - m_targetWorldPosition).normalized;
 
-                transform.position = pos;
+                m_targetWorldPosition = pos;
                 if (dir != Vector3.zero)
-                    transform.forward = dir;
+                    m_targetLookDirection = dir;
             }
         }
+
+        private Vector3 m_targetWorldPosition;
+        private Vector3 m_targetLookDirection;
 
         //================================================================================================================//
 
@@ -196,10 +226,10 @@ namespace Prototypes.Alex.Boats
             state = newState;
             switch (state)
             {
-                case STATE.MOVING_TO_DOCK when !m_approvedDocking:
-                    dockTarget = s_dockManager.GetRandomDockAvailableDock();
-                    m_moveTarget = s_dockManager.GetDockTransform(dockTarget);
-                    
+                case STATE.PREPARING_TO_DOCK when !m_approvedDocking:
+                    m_dockTarget = s_dockManager.GetRandomDockAvailableDock();
+                    m_dockPath = s_dockManager.GetDockPath(m_dockTarget);
+                    m_moveTarget = m_dockPath.transform;
                     boatFlagHoist.StartListeningForPlayerFlags();
                     break;
                 case STATE.AWAITING_PLAYER_FLAGS:
@@ -221,6 +251,7 @@ namespace Prototypes.Alex.Boats
         {
             switch (oldState)
             {
+                case STATE.PREPARING_TO_DOCK:
                 case STATE.MOVING_TO_DOCK:
                 case STATE.AWAITING_PLAYER_FLAGS:
                     boatFlagHoist.StopListeningForPlayerFlags();
@@ -253,10 +284,11 @@ namespace Prototypes.Alex.Boats
                 case FLAG.MOVE_TO_B when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
                 case FLAG.MOVE_TO_C when inRangeOfTower && state != STATE.MOVING_TO_DOCK:
                     m_approvedDocking = true;
-                    dockTarget = flagCommsResults.Action;
-                    m_moveTarget = s_dockManager.GetDockTransform(dockTarget);
-                    SetState(STATE.MOVING_TO_DOCK);
-                    boatFlagHoist.HoistFlags(new List<FLAG>() {cargoType, dockTarget });
+                    m_dockTarget = flagCommsResults.Action;
+                    m_dockPath = s_dockManager.GetDockPath(m_dockTarget);
+                    m_moveTarget = m_dockPath.transform;
+                    SetState(STATE.PREPARING_TO_DOCK);
+                    boatFlagHoist.HoistFlags(new List<FLAG>() {cargoType, m_dockTarget });
                     return true;
             }
             

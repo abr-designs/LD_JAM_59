@@ -75,7 +75,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4de3efa47247e944f8ef637090f34a86, type: 2}
   waitCamera: {fileID: 0}
   playerCamera: {fileID: 0}
-  debug: 0
+  debug: 1
   boardReviewTimeOverride: 0
   boatSpawnTimeOverride: 0
   startDelayOverride: 0
@@ -415,14 +415,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5185950440957327888}
     m_Modifications:
-    - target: {fileID: 2285018605834950802, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2285018605834950802, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 178.1
-      objectReference: {fileID: 0}
     - target: {fileID: 3164517929772357293, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -466,30 +458,6 @@ PrefabInstance:
     - target: {fileID: 3181344610650101717, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
       propertyPath: m_Name
       value: --- DOCK MANAGER ---
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065145051390468188, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 57.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065145051390468188, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 149.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7949691183947450515, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 32.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7949691183947450515, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 165.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8106244724408937156, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -50.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8106244724408937156, guid: 58088e94795f90c449b98d01a30ec59e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
