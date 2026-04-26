@@ -10,7 +10,6 @@ using Utilities.Debugging;
 
 namespace Prototypes.Alex.Boats
 {
-    [RequireComponent(typeof(BoatFlagHoist))]
     public class BaseBoat : MonoBehaviour
     {
         enum STATE
@@ -31,6 +30,9 @@ namespace Prototypes.Alex.Boats
         public FLAG CargoType => cargoType;
         public FLAG ShipType => shipType;
         public bool IsDocked => isDocked;
+
+        [SerializeField]
+        private SmoothMoveAndFace smoothMoveAndFace;
         
         [SerializeField]
         private Renderer[] flagRenderers;
@@ -111,6 +113,8 @@ namespace Prototypes.Alex.Boats
         private void Start()
         {
             m_startPosition = transform.position;
+            m_targetWorldPosition = m_startPosition;
+            m_targetLookDirection = transform.forward;
             AllBoats.Add(this);
 
             SetState(startingState);
@@ -163,8 +167,8 @@ namespace Prototypes.Alex.Boats
                     
                     var newPosition = m_dockPath.GetPosition(m_dockingProgress, boatMoveSpeed, out var forwardDirection, out var totalT);
 
-                    transform.position = newPosition;
-                    transform.forward = forwardDirection;
+                    m_targetWorldPosition = newPosition;
+                    m_targetLookDirection = forwardDirection;
                     
                     if (Mathf.Approximately(totalT, 1f))
                     {
@@ -196,18 +200,23 @@ namespace Prototypes.Alex.Boats
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            smoothMoveAndFace.SetTarget(m_targetWorldPosition, m_targetLookDirection.normalized);
 
             return;
             void MoveTowards(Vector3 target)
             {
-                var pos = Vector3.MoveTowards(transform.position, target, Time.deltaTime * boatMoveSpeed);
-                var dir = (pos - transform.position).normalized;
+                var pos = Vector3.MoveTowards(m_targetWorldPosition, target, Time.deltaTime * boatMoveSpeed);
+                var dir = (pos - m_targetWorldPosition).normalized;
 
-                transform.position = pos;
+                m_targetWorldPosition = pos;
                 if (dir != Vector3.zero)
-                    transform.forward = dir;
+                    m_targetLookDirection = dir;
             }
         }
+
+        private Vector3 m_targetWorldPosition;
+        private Vector3 m_targetLookDirection;
 
         //================================================================================================================//
 
