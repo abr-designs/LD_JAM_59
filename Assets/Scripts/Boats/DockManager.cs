@@ -33,6 +33,9 @@ namespace Prototypes.Alex.Boats
         }
         
         public static event Action DocksFull;
+        public static event Action OnWrongDock;
+        
+        private IReadOnlyCollection<RuleData> m_daysRules;
         
         [SerializeField]
         private List<DockData> docks = new();
@@ -61,9 +64,17 @@ namespace Prototypes.Alex.Boats
                 throw new ArgumentNullException(nameof(dockFlag), "Cannot find dock with flag: " + dockFlag);
 
             if (dockData.IsFull)
+            {
+                //If this boat auto-attempted to dock here OR they were sent to a full dock, that's a problem
+                OnWrongDock?.Invoke();
                 return false;
+            }
             
             dockData.boats.Add(boat);
+            
+            //Determine if boat is supposed to be here based on the days rules & if it located at the right place
+            if(IsBoatAllowedAtDock(boat, dockData))
+                OnWrongDock?.Invoke();
             
             if(AreDocksFull())
                 DocksFull?.Invoke();
@@ -81,11 +92,27 @@ namespace Prototypes.Alex.Boats
             return docks.First(d => d.dock == dock).dockPath;
         }
 
+        private bool IsBoatAllowedAtDock(BaseBoat boat, DockData dockData)
+        {
+            if (dockData.cargoType != boat.CargoType)
+                return false;
+
+            foreach (var rule in m_daysRules)
+            {
+                if (rule.shipType == boat.ShipType && rule.cargoTypes == boat.CargoType)
+                    return false;
+            }
+
+            return true;
+        }
+
         //Day Behaviours
         //================================================================================================================//
 
-        public void SetupDocks(IReadOnlyList<DockRequirementData> dockRequirements)
+        public void SetupDocks(IReadOnlyList<DockRequirementData> dockRequirements, List<RuleData> daysRules)
         {
+            m_daysRules = daysRules;
+            
             foreach (var dock in docks)
             {
                 dock.dockFlagHoist.RemoveFlags();

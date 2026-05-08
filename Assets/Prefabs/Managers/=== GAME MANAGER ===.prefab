@@ -54,6 +54,8 @@ MonoBehaviour:
   bulletinManager: {fileID: 4149692439369661292}
   boardReviewTime: 7
   fadeTime: 0.5
+  maxStrikes: 3
+  currentStrikes: 0
   dayDefinitions:
   - {fileID: 11400000, guid: f26f1b50ac7eead468e0a93665144fb9, type: 2}
   - {fileID: 11400000, guid: 9a3de24af7e693240b95c086b223f17d, type: 2}

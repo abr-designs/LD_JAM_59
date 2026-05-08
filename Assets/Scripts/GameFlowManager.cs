@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using Prototypes.Alex.Boats;
 using Prototypes.Alex.Days;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Prototypes.Alex
 {
     public class GameFlowManager : MonoBehaviour
     {
+        public static event Action<int> OnStrikesChanged;
+        public static event Action OnGameOver;
+        
         [SerializeField, Header("Managers")]
         private DockManager dockManager;
         
@@ -22,6 +26,12 @@ namespace Prototypes.Alex
 
         [SerializeField, Min(0f)]
         private float fadeTime = 0.5f;
+
+        public int MaxStrikes => maxStrikes;
+        [SerializeField, Min(0)]
+        private int maxStrikes = 3;
+        [SerializeField, ReadOnly]
+        private int currentStrikes;
         
         [SerializeField, Header("Days")]
         private List<DayDefinition> dayDefinitions;
@@ -34,6 +44,9 @@ namespace Prototypes.Alex
         private Camera waitCamera;
         [SerializeField]
         private Camera playerCamera;
+        
+        private bool m_gameOver;
+        private Coroutine m_gameLoopCoroutine;
 
 #if UNITY_EDITOR
         [SerializeField, Header("Debugging")]
@@ -47,18 +60,34 @@ namespace Prototypes.Alex
         private float startDelayOverride;
 #endif
 
-       
+        //Unity Functions
+        //================================================================================================================//
+
+        private void OnEnable()
+        {
+            DockManager.OnWrongDock += ApplyStrike;
+        }
 
         private void Start()
         {
+            
             m_flags = new Dictionary<FLAG, FlagDefinition>();
             foreach (var flagDefinition in flagDefinitions)
             {
                 m_flags.Add(flagDefinition.flag, flagDefinition);
             }
             
-            StartCoroutine(GameLoopCoroutine());
+            m_gameLoopCoroutine = StartCoroutine(GameLoopCoroutine());
         }
+
+        private void OnDisable()
+        {
+            DockManager.OnWrongDock -= ApplyStrike;
+        }
+        
+        //Game Loop
+        //================================================================================================================//
+
 
         private IEnumerator GameLoopCoroutine()
         {
@@ -69,7 +98,7 @@ namespace Prototypes.Alex
                 waitCamera.gameObject.SetActive(true);
                 playerCamera.gameObject.SetActive(false);
                 
-                dockManager.SetupDocks(dayDefinition.dockRequirements);
+                dockManager.SetupDocks(dayDefinition.dockRequirements, dayDefinition.rules);
                 bulletinManager.Setup(dayDefinition.dockRequirements, dayDefinition.rules);
                 
                 yield return ScreenFader.FadeIn(fadeTime, null);
@@ -135,6 +164,30 @@ namespace Prototypes.Alex
                 yield return new WaitForSeconds(wait);
 #endif
             }
+        }
+
+        //Callbacks
+        //================================================================================================================//
+
+        [Button]
+        private void ApplyStrike()
+        {
+            if (m_gameOver)
+                return;
+            
+            //If it's set to zero or less, we don't care
+            if (maxStrikes <= 0)
+                return;
+            
+            currentStrikes++;
+            OnStrikesChanged?.Invoke(currentStrikes);
+
+            if (currentStrikes < maxStrikes)
+                return;
+            
+            OnGameOver?.Invoke();
+
+            StopCoroutine(m_gameLoopCoroutine);
         }
         
         //Utility Functions
