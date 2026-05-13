@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 using GameInput;
 
@@ -29,22 +28,28 @@ namespace Prototypes.Alex
 
         private void OnEnable()
         {
+            GameFlowManager.OnGameOver += OnGameOver;
             GameInputDelegator.OnJumpPressed += OnJumpPressed;
             GameInputDelegator.OnMovementChanged += OnMovementChanged;
             GameInputDelegator.OnMouseMoved += OnMouseMoved;
+            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = true;
         }
 
         private void Start()
         {
             controller = GetComponent<CharacterController>();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = true;
         }
 
         private void OnDisable()
         {
+            GameFlowManager.OnGameOver -= OnGameOver;
             GameInputDelegator.OnMovementChanged -= OnMovementChanged;
             GameInputDelegator.OnMouseMoved -= OnMouseMoved;
+            
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         private void Update()
@@ -127,6 +132,15 @@ namespace Prototypes.Alex
 
             velocity += wishDir * accelSpeed;
         }
+
+        //Callbacks
+        //================================================================================================================//
+
+        private void OnGameOver()
+        {
+            this.enabled = false;
+        }
+        
         //Input Callbacks
         //================================================================================================================//
 
