@@ -26,7 +26,11 @@ namespace Prototypes.Alex
 
         [SerializeField, Min(0f)]
         private float fadeTime = 0.5f;
+        
+        [SerializeField, Min(0f)]
+        private float levelCompleteDelay = 1.5f;
 
+        [Header("Strikes")]
         public int MaxStrikes => maxStrikes;
         [SerializeField, Min(0)]
         private int maxStrikes = 3;
@@ -130,11 +134,13 @@ namespace Prototypes.Alex
                 BaseBoat.OnNoMoreBoats += OnDocksFull;
 
                 yield return new WaitUntil(() => isDone);
-
-                StopCoroutine(spawnShipsCoroutine);
-                BaseBoat.CleanBoats();
-                yield return ScreenFader.FadeOut(fadeTime, null);
                 
+                StopCoroutine(spawnShipsCoroutine);
+                
+                yield return new WaitForSeconds(levelCompleteDelay);
+                
+                yield return ScreenFader.FadeOut(fadeTime, BaseBoat.CleanBoats);
+
                 continue;
 
                 void OnDocksFull()

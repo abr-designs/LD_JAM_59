@@ -5242,9 +5242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4dfc88afdfd2c84095f9192fd4b3593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxMoveSpeed: 10
+  baseBoat: {fileID: 7549452678558608447}
   positionSmoothTime: 0.2
   rotationSpeed: 5
+  rotationOffsetEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &6001116549057765602
 PrefabInstance:
   m_ObjectHideFlags: 0

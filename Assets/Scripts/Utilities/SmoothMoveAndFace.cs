@@ -1,9 +1,10 @@
+using Prototypes.Alex.Boats;
 using UnityEngine;
 
 public class SmoothMoveAndFace : MonoBehaviour
 {
-    [Header("Movement")]
-    public float maxMoveSpeed = 10f;
+    [Header("Movement")] [SerializeField] private BaseBoat baseBoat;
+    //public float maxMoveSpeed = 10f;
     public float positionSmoothTime = 0.2f;
 
     [Header("Rotation")]
@@ -34,7 +35,7 @@ public class SmoothMoveAndFace : MonoBehaviour
             targetPosition,
             ref velocity,
             positionSmoothTime,
-            maxMoveSpeed
+            baseBoat.MoveSpeed
         );
 
         Vector3 dir = targetDirection;

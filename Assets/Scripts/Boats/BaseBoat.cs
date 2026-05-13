@@ -30,6 +30,7 @@ namespace Prototypes.Alex.Boats
         public FLAG CargoType => cargoType;
         public FLAG ShipType => shipType;
         public bool IsDocked => isDocked;
+        public float MoveSpeed => boatMoveSpeed;
 
         [SerializeField]
         private SmoothMoveAndFace smoothMoveAndFace;
@@ -144,7 +145,7 @@ namespace Prototypes.Alex.Boats
                         if (distance < 1f)
                         {
                             //Otherwise just move towards the docks
-                            SetState(STATE.MOVING_TO_DOCK);
+                            SetState(STATE.PREPARING_TO_DOCK);
                         }
                     }
 
