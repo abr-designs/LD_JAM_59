@@ -5423,6 +5423,7 @@ MonoBehaviour:
   spacing: 0.16
   moveSpeed: 0
   presentFlagsOnStart: 
+  facePlayer: 1
 --- !u!114 &3687942647707114761
 MonoBehaviour:
   m_ObjectHideFlags: 0

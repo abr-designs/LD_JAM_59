@@ -24,6 +24,9 @@ namespace Prototypes.Alex
         
         [SerializeField]
         private List<FLAG> presentFlagsOnStart;
+        
+        [SerializeField]
+        private bool facePlayer;
 
         //Unity Functions
         //================================================================================================================//
@@ -38,7 +41,20 @@ namespace Prototypes.Alex
             if(presentFlagsOnStart != null && presentFlagsOnStart.Count > 0)
                 HoistFlags(presentFlagsOnStart);
         }
+        
+        private void LateUpdate()
+        {
+            if (!facePlayer)
+                return;
 
+            if (ActiveFlagRenderers.Count <= 0)
+                return;
+
+            foreach (var flagRenderer in ActiveFlagRenderers)
+            {
+                flagRenderer.transform.LookAt(s_playerFlagHoist.transform, transform.up);
+            }
+        }
 
         //================================================================================================================//
 

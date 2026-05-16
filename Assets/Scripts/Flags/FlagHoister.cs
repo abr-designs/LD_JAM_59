@@ -20,9 +20,9 @@ public class FlagHoister : MonoBehaviour
     public Vector3 targetPosition;
     public float spacing;
     public float moveSpeed;
+    
 
-
-    private List<GameObject> m_activeFlagRenderers;
+    protected List<GameObject> ActiveFlagRenderers;
 
     private static GameFlowManager s_gameFlowManager;
 
@@ -32,8 +32,8 @@ public class FlagHoister : MonoBehaviour
         if (s_gameFlowManager == null)
             s_gameFlowManager = FindAnyObjectByType<GameFlowManager>();
 
-        if(m_activeFlagRenderers == null)
-            m_activeFlagRenderers = new List<GameObject>();
+        if(ActiveFlagRenderers == null)
+            ActiveFlagRenderers = new List<GameObject>();
     }
 
     public void HoistFlags(List<FLAG> flags)
@@ -44,10 +44,10 @@ public class FlagHoister : MonoBehaviour
         if (maxFlags > 0 && flags.Count > maxFlags)
             return;
         
-        if(m_activeFlagRenderers == null)
-            m_activeFlagRenderers = new List<GameObject>();
+        if(ActiveFlagRenderers == null)
+            ActiveFlagRenderers = new List<GameObject>();
         
-        if (m_activeFlagRenderers.Count > 0)
+        if (ActiveFlagRenderers.Count > 0)
         {
             StartCoroutine(RemoveFlagsCoroutine());
         }
@@ -61,10 +61,10 @@ public class FlagHoister : MonoBehaviour
 
     public void RemoveFlags()
     {
-        if (m_activeFlagRenderers == null)
+        if (ActiveFlagRenderers == null)
             return;
         
-        if (m_activeFlagRenderers.Count == 0)
+        if (ActiveFlagRenderers.Count == 0)
             return;
 
         StartCoroutine(RemoveFlagsCoroutine());
@@ -95,7 +95,7 @@ public class FlagHoister : MonoBehaviour
             var flagMaterial = SharedMaterialManager.GetFlagMaterial(flag);
             flagGameObject.GetComponentInChildren<SkinnedMeshRenderer>().SetSharedMaterial(0, flagMaterial);
 
-            m_activeFlagRenderers.Add(flagGameObject);
+            ActiveFlagRenderers.Add(flagGameObject);
         }
 
         float elapsed = 0f;
@@ -105,12 +105,12 @@ public class FlagHoister : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            for (int i = 0; i < m_activeFlagRenderers.Count; i++)
+            for (int i = 0; i < ActiveFlagRenderers.Count; i++)
             {
                 var targetPos = targetPosition + (dir * ((flagSize / 2f) + (spacing * i) + (i * flagSize)));
                 // Smooth interpolation
                 var currentPos = Vector3.Lerp(flagSpawnPosition, targetPos, t);
-                m_activeFlagRenderers[i].transform.position = transform.TransformPoint(currentPos);
+                ActiveFlagRenderers[i].transform.position = transform.TransformPoint(currentPos);
             }
             yield return null; // wait one frame
 
@@ -122,14 +122,14 @@ public class FlagHoister : MonoBehaviour
 
     private IEnumerator RemoveFlagsCoroutine()
     {
-        for (int i = m_activeFlagRenderers.Count - 1; i >= 0; i--)
+        for (int i = ActiveFlagRenderers.Count - 1; i >= 0; i--)
         {
-            Destroy(m_activeFlagRenderers[i].gameObject);
-            m_activeFlagRenderers.RemoveAt(i);
+            Destroy(ActiveFlagRenderers[i].gameObject);
+            ActiveFlagRenderers.RemoveAt(i);
         }
 
         CurrentFlags = new List<FLAG>();
-        m_activeFlagRenderers.Clear();
+        ActiveFlagRenderers.Clear();
 
         yield break;
     }
