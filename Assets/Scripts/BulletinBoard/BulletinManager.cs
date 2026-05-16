@@ -11,13 +11,6 @@ namespace Prototypes.Alex.Days
         [SerializeField]
         private ManifestElement[] manifestElements;
 
-        private void Start()
-        {
-            ResetBoardElements();
-
-
-        }
-
         public void Setup(List<DockRequirementData> dockRequirements, List<RuleData> rules)
         {
             ResetBoardElements();
